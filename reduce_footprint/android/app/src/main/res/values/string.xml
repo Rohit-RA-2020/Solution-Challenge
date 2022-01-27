@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">reduce_footprint</string>    
+    <string name="facebook_app_id">462791082230120</string>
+    <string name="fb_login_protocol_scheme">fb462791082230120</string>
+    <string name="facebook_client_token">78385611aa8f8456f11bc101ecf246b2</string>
+</resources>

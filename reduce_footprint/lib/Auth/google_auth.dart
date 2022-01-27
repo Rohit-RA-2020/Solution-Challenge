@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:reduce_footprint/Screens/home.dart';
 
 class GoogleSignInProvider {
   final BuildContext context;
@@ -29,27 +30,49 @@ class GoogleSignInProvider {
     );
 
     try {
-      await FirebaseAuth.instance.signInWithCredential(credential);
+      final UserCredential user =
+          await FirebaseAuth.instance.signInWithCredential(credential);
 
+      if (user.user != null) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Home(
+              email: user.user!.email,
+              name: user.user!.displayName,
+              img: user.user!.photoURL,
+            ),
+          ),
+        );
+      }
+    } on FirebaseException catch (e) {
       showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: const Text('Google'),
-            content: const Text('User Authenticated'),
+            elevation: 5,
+            shape: const RoundedRectangleBorder(
+                side: BorderSide(width: 1.5),
+                borderRadius: BorderRadius.all(Radius.circular(20))),
+            backgroundColor: Colors.green.shade300,
+            title: const Text('Error 😢'),
+            content: Text(e.message.toString()),
             actions: [
               TextButton(
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: const Text('OK'),
+                child: Text(
+                  'OK',
+                  style: TextStyle(
+                      color: Colors.green.shade900,
+                      fontWeight: FontWeight.bold),
+                ),
               )
             ],
           );
         },
       );
-    } on FirebaseException catch (e) {
-      print(e);
     }
   }
 }

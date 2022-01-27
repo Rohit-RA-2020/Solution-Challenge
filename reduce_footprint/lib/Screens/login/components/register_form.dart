@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:reduce_footprint/Auth/auth.dart';
+import 'package:reduce_footprint/Auth/facebook_auth.dart';
 import 'package:reduce_footprint/Auth/google_auth.dart';
 import '../../../constants.dart';
 
@@ -134,7 +135,12 @@ class _RegisterFormState extends State<RegisterForm> {
                           },
                           child: SvgPicture.asset('assets/logo/google.svg',
                               height: 40)),
-                      SvgPicture.asset('assets/logo/facebook.svg', height: 50),
+                      InkWell(
+                          onTap: () {
+                            FacebookSignProvider().signInWithFacebook(context);
+                          },
+                          child: SvgPicture.asset('assets/logo/facebook.svg',
+                              height: 50)),
                       const SizedBox(width: 60),
                     ],
                   ),

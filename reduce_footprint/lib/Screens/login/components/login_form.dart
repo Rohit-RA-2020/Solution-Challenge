@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:reduce_footprint/Auth/auth.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:reduce_footprint/Auth/facebook_auth.dart';
 import 'package:reduce_footprint/Auth/google_auth.dart';
 import '../../../constants.dart';
 
@@ -142,7 +143,13 @@ class _LoginFormState extends State<LoginForm> {
                       child: SvgPicture.asset('assets/logo/google.svg',
                           height: 40.sp),
                     ),
-                    SvgPicture.asset('assets/logo/facebook.svg', height: 50.sp),
+                    InkWell(
+                      onTap: () {
+                        FacebookSignProvider().signInWithFacebook(context);
+                      },
+                      child: SvgPicture.asset('assets/logo/facebook.svg',
+                          height: 50.sp),
+                    ),
                     const SizedBox(width: 60),
                   ],
                 ),
