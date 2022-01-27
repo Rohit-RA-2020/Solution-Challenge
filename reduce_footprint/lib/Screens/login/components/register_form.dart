@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:reduce_footprint/components/rounded_button.dart';
-import 'package:reduce_footprint/components/rounded_input.dart';
-import 'package:reduce_footprint/components/rounded_password_input.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '../../../constants.dart';
 
 class RegisterForm extends StatelessWidget {
   const RegisterForm({
@@ -40,14 +38,81 @@ class RegisterForm extends StatelessWidget {
                     'Welcome',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
                   ),
-                  const SizedBox(height: 40),
+                  const SizedBox(height: 20),
                   Image.asset('assets/images/nature1.png', height: 200),
-                  const SizedBox(height: 40),
-                  const RoundedInput(icon: Icons.mail, hint: 'Username'),
-                  const RoundedInput(icon: Icons.face_rounded, hint: 'Name'),
-                  const RoundedPasswordInput(hint: 'Password'),
+                  const SizedBox(height: 30),
+                  Container(
+                    margin: const EdgeInsets.symmetric(vertical: 10),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                    width: size.width * 0.8,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color: kPrimaryColor.withAlpha(50)),
+                    child: const TextField(
+                      cursorColor: kPrimaryColor,
+                      decoration: InputDecoration(
+                          icon: Icon(Icons.email, color: kPrimaryColor),
+                          hintText: 'Email',
+                          border: InputBorder.none),
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.symmetric(vertical: 10),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                    width: size.width * 0.8,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color: kPrimaryColor.withAlpha(50)),
+                    child: const TextField(
+                      cursorColor: kPrimaryColor,
+                      obscureText: true,
+                      decoration: InputDecoration(
+                          icon: Icon(Icons.lock, color: kPrimaryColor),
+                          hintText: 'Password',
+                          border: InputBorder.none),
+                    ),
+                  ),
                   const SizedBox(height: 10),
-                  const RoundedButton(title: 'SIGN UP'),
+                  InkWell(
+                    onTap: () {},
+                    borderRadius: BorderRadius.circular(30),
+                    child: Container(
+                      width: size.width * 0.8,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color: kPrimaryColor,
+                      ),
+                      padding: const EdgeInsets.symmetric(vertical: 20),
+                      alignment: Alignment.center,
+                      child: const Text(
+                        'SIGN-UP',
+                        style: TextStyle(color: Colors.white, fontSize: 18),
+                      ),
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(top: 8.0),
+                    child: Text('OR',
+                        style: TextStyle(
+                            color: kPrimaryColor, fontWeight: FontWeight.bold)),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(bottom: 10.0, top: 8.0),
+                    child: Text('Sign-Up Using',
+                        style: TextStyle(
+                            color: kPrimaryColor, fontWeight: FontWeight.bold)),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      const SizedBox(width: 60),
+                      SvgPicture.asset('assets/logo/google.svg', height: 40),
+                      SvgPicture.asset('assets/logo/facebook.svg', height: 50),
+                      const SizedBox(width: 60),
+                    ],
+                  ),
                   const SizedBox(height: 10),
                 ],
               ),
