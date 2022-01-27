@@ -1,10 +1,14 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:reduce_footprint/Screens/login/login.dart';
 import 'package:reduce_footprint/constants.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(const MaterialApp(home: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -19,7 +23,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           primaryColor: kPrimaryColor,
           textTheme: GoogleFonts.robotoTextTheme(Theme.of(context).textTheme)),
-      home: const LoginScreen(),
+      home: ScreenUtilInit(
+          designSize: Size(MediaQuery.of(context).size.width,
+              MediaQuery.of(context).size.height),
+          builder: () => const LoginScreen()),
     );
   }
 }

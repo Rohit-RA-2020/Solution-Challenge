@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:reduce_footprint/Auth/auth.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:reduce_footprint/Auth/google_auth.dart';
 import '../../../constants.dart';
 
 class LoginForm extends StatefulWidget {
@@ -44,11 +47,11 @@ class _LoginFormState extends State<LoginForm> {
                   'Welcome Back',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
                 ),
-                const SizedBox(height: 20),
-                Image.asset('assets/images/nature.png', height: 200),
+                SizedBox(height: 20.sp),
+                Image.asset('assets/images/nature.png', height: 200.sp),
                 const SizedBox(height: 20),
                 Container(
-                  margin: const EdgeInsets.symmetric(vertical: 10),
+                  margin: EdgeInsets.symmetric(vertical: 10.w),
                   padding:
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                   width: widget.size.width * 0.8,
@@ -91,14 +94,17 @@ class _LoginFormState extends State<LoginForm> {
                 const SizedBox(height: 10),
                 InkWell(
                   onTap: () {
-                    print(_emailController.text);
-                    print(_passwController.text);
+                    Authentication(
+                      context: context,
+                      email: _emailController.text,
+                      password: _passwController.text,
+                    ).logIn();
                     _emailController.clear();
                     _passwController.clear();
                   },
                   borderRadius: BorderRadius.circular(30),
                   child: Container(
-                    width: widget.size.width * 0.8,
+                    width: 280.h,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30),
                       color: kPrimaryColor,
@@ -127,8 +133,16 @@ class _LoginFormState extends State<LoginForm> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
                     const SizedBox(width: 60),
-                    SvgPicture.asset('assets/logo/google.svg', height: 40),
-                    SvgPicture.asset('assets/logo/facebook.svg', height: 50),
+                    InkWell(
+                      onTap: () {
+                        GoogleSignInProvider(
+                          context: context,
+                        ).googleLogin();
+                      },
+                      child: SvgPicture.asset('assets/logo/google.svg',
+                          height: 40.sp),
+                    ),
+                    SvgPicture.asset('assets/logo/facebook.svg', height: 50.sp),
                     const SizedBox(width: 60),
                   ],
                 ),

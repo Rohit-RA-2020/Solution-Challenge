@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:reduce_footprint/Auth/auth.dart';
+import 'package:reduce_footprint/Auth/google_auth.dart';
 import '../../../constants.dart';
 
-class RegisterForm extends StatelessWidget {
+class RegisterForm extends StatefulWidget {
   const RegisterForm({
     Key? key,
     required this.isLogin,
@@ -17,17 +19,25 @@ class RegisterForm extends StatelessWidget {
   final double defaultLoginSize;
 
   @override
+  State<RegisterForm> createState() => _RegisterFormState();
+}
+
+class _RegisterFormState extends State<RegisterForm> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwController = TextEditingController();
+
+  @override
   Widget build(BuildContext context) {
     return AnimatedOpacity(
-      opacity: isLogin ? 0.0 : 1.0,
-      duration: animationDuration * 5,
+      opacity: widget.isLogin ? 0.0 : 1.0,
+      duration: widget.animationDuration * 5,
       child: Visibility(
-        visible: !isLogin,
+        visible: !widget.isLogin,
         child: Align(
           alignment: Alignment.bottomCenter,
           child: SizedBox(
-            width: size.width,
-            height: defaultLoginSize,
+            width: widget.size.width,
+            height: widget.defaultLoginSize,
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -45,13 +55,14 @@ class RegisterForm extends StatelessWidget {
                     margin: const EdgeInsets.symmetric(vertical: 10),
                     padding:
                         const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                    width: size.width * 0.8,
+                    width: widget.size.width * 0.8,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
                         color: kPrimaryColor.withAlpha(50)),
-                    child: const TextField(
+                    child: TextField(
+                      controller: _emailController,
                       cursorColor: kPrimaryColor,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                           icon: Icon(Icons.email, color: kPrimaryColor),
                           hintText: 'Email',
                           border: InputBorder.none),
@@ -61,14 +72,15 @@ class RegisterForm extends StatelessWidget {
                     margin: const EdgeInsets.symmetric(vertical: 10),
                     padding:
                         const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                    width: size.width * 0.8,
+                    width: widget.size.width * 0.8,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
                         color: kPrimaryColor.withAlpha(50)),
-                    child: const TextField(
+                    child: TextField(
+                      controller: _passwController,
                       cursorColor: kPrimaryColor,
                       obscureText: true,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                           icon: Icon(Icons.lock, color: kPrimaryColor),
                           hintText: 'Password',
                           border: InputBorder.none),
@@ -76,10 +88,16 @@ class RegisterForm extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Authentication(
+                        context: context,
+                        email: _emailController.text,
+                        password: _passwController.text,
+                      ).signUp();
+                    },
                     borderRadius: BorderRadius.circular(30),
                     child: Container(
-                      width: size.width * 0.8,
+                      width: widget.size.width * 0.8,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
                         color: kPrimaryColor,
@@ -108,7 +126,14 @@ class RegisterForm extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       const SizedBox(width: 60),
-                      SvgPicture.asset('assets/logo/google.svg', height: 40),
+                      InkWell(
+                          onTap: () {
+                            GoogleSignInProvider(
+                              context: context,
+                            ).googleLogin();
+                          },
+                          child: SvgPicture.asset('assets/logo/google.svg',
+                              height: 40)),
                       SvgPicture.asset('assets/logo/facebook.svg', height: 50),
                       const SizedBox(width: 60),
                     ],
