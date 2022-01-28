@@ -95,6 +95,8 @@ class _RegisterFormState extends State<RegisterForm> {
                         email: _emailController.text,
                         password: _passwController.text,
                       ).signUp();
+                      _emailController.clear();
+                      _passwController.clear();
                     },
                     borderRadius: BorderRadius.circular(30),
                     child: Container(
