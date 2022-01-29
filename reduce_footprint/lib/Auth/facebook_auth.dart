@@ -1,7 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
-import 'package:reduce_footprint/Screens/home.dart';
+import 'package:reduce_footprint/Screens/getting_started.dart';
 
 class FacebookSignProvider {
   void signInWithFacebook(BuildContext context) async {
@@ -17,8 +18,8 @@ class FacebookSignProvider {
         if (user.user != null) {
           Navigator.push(
             context,
-            MaterialPageRoute(
-              builder: (context) => Home(
+            CupertinoPageRoute(
+              builder: (context) => GettingStarted(
                 email: user.user!.email,
                 name: user.user!.displayName,
                 img: user.user!.photoURL,

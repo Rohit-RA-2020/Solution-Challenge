@@ -21,6 +21,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Animated Login',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+          scaffoldBackgroundColor: const Color(0xFFfffcf5),
           primaryColor: kPrimaryColor,
           textTheme: GoogleFonts.robotoTextTheme(Theme.of(context).textTheme)),
       home: ScreenUtilInit(
