@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
+import 'package:reduce_footprint/Screens/questions.dart';
 import '../constants.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -58,7 +59,14 @@ class GettingStarted extends StatelessWidget {
                       'Get Started',
                       style: TextStyle(fontSize: 18.sp),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                          builder: (context) => const Questions(),
+                        ),
+                      );
+                    },
                     style: ButtonStyle(
                       elevation: MaterialStateProperty.all<double>(10.0),
                       backgroundColor: MaterialStateProperty.all(kPrimaryColor),
