@@ -39,9 +39,7 @@ class GoogleSignInProvider {
           context,
           CupertinoPageRoute(
             builder: (context) => GettingStarted(
-              email: user.user!.email,
-              name: user.user!.displayName,
-              img: user.user!.photoURL,
+             user: user.user!,
             ),
           ),
         );

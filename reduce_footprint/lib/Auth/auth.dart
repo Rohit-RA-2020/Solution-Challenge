@@ -87,11 +87,8 @@ class Authentication {
           context,
           CupertinoPageRoute(
             builder: (context) => GettingStarted(
-              email: user.user!.email,
-              name: 'User',
-              img:
-                  'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Gnome-stock_person.svg/72px-Gnome-stock_person.svg.png',
-            ),
+              user: user.user!,
+             ),
           ),
         );
       }

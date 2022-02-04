@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
@@ -5,16 +7,8 @@ import '../constants.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class GettingStarted extends StatelessWidget {
-  const GettingStarted({
-    Key? key,
-    required this.email,
-    required this.name,
-    required this.img,
-  }) : super(key: key);
-
-  final String? email;
-  final String? name;
-  final String? img;
+  const GettingStarted({Key? key, required this.user}) : super(key: key);
+  final User user;
 
   @override
   Widget build(BuildContext context) {
@@ -40,8 +34,17 @@ class GettingStarted extends StatelessWidget {
                 SizedBox(
                   child: Center(
                     child: Text(
+                      'Welcome, ${user.displayName ?? 'User'}',
+                      style: GoogleFonts.kalam(fontSize: 22.sp),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  child: Center(
+                    child: Text(
                       'Before we continue, Please answer some questions',
-                      style: GoogleFonts.supermercadoOne(fontSize: 20.sp),
+                      style: GoogleFonts.kalam(fontSize: 20.sp),
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -68,7 +71,7 @@ class GettingStarted extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 110.sp),
+                SizedBox(height: 50.sp),
               ],
             ),
           ],
