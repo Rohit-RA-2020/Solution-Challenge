@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:reduce_footprint/constants.dart';
@@ -14,6 +15,8 @@ class Questions extends StatefulWidget {
 class _QuestionsState extends State<Questions> {
   int questionIndex = 0;
   late int? selectedOption = 100;
+
+  var responses = <String, int>{};
 
   @override
   Widget build(BuildContext context) {
@@ -68,12 +71,12 @@ class _QuestionsState extends State<Questions> {
                 )
               : FloatingActionButton.extended(
                   backgroundColor: kPrimaryColor,
-                  onPressed: () {
-                    if (questionIndex < questionsList.length - 1) {
-                      setState(() {
-                        questionIndex++;
-                      });
-                    }
+                  onPressed: () async {
+                    var dio = Dio();
+                    var result = await dio.post(
+                        'http://10.0.2.2:3000/calculate',
+                        data: responses);
+                    print(result);
                   },
                   label: const Text('Submit'),
                   icon: const Icon(Icons.check),
@@ -125,6 +128,8 @@ class _QuestionsState extends State<Questions> {
                       onTap: () {
                         setState(() {
                           selectedOption = index;
+                          responses.addAll({questionIndex.toString(): index});
+                          print(responses);
                         });
                       },
                       title:

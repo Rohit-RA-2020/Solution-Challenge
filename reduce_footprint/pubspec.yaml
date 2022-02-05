@@ -43,6 +43,7 @@ dependencies:
   flutter_facebook_auth: ^4.0.1
   flutter_spinkit: ^5.1.0
   lottie: ^1.2.1
+  dio: ^4.0.4
 
 dev_dependencies:
   flutter_test:
