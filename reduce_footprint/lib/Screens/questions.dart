@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:reduce_footprint/Screens/login/result.dart';
 import 'package:reduce_footprint/constants.dart';
 import 'package:reduce_footprint/models/questions_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -76,7 +78,13 @@ class _QuestionsState extends State<Questions> {
                     var result = await dio.post(
                         'http://10.0.2.2:3000/calculate',
                         data: responses);
-                    print(result);
+
+                    Navigator.pushReplacement(
+                      context,
+                      CupertinoPageRoute(
+                        builder: (context) => Result(result: result),
+                      ),
+                    );
                   },
                   label: const Text('Submit'),
                   icon: const Icon(Icons.check),
@@ -129,7 +137,6 @@ class _QuestionsState extends State<Questions> {
                         setState(() {
                           selectedOption = index;
                           responses.addAll({questionIndex.toString(): index});
-                          print(responses);
                         });
                       },
                       title:
