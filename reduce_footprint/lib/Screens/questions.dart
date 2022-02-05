@@ -76,7 +76,7 @@ class _QuestionsState extends State<Questions> {
                   onPressed: () async {
                     var dio = Dio();
                     var result = await dio.post(
-                        'http://10.0.2.2:3000/calculate',
+                        'https://carbonfootprint-api.herokuapp.com/calculate',
                         data: responses);
 
                     Navigator.pushReplacement(
@@ -95,8 +95,8 @@ class _QuestionsState extends State<Questions> {
         child: Container(
           width: double.infinity,
           margin:
-              const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0 * 2),
-          padding: const EdgeInsets.all(20.0),
+              const EdgeInsets.symmetric(horizontal: 10.0),
+          padding: const EdgeInsets.all(10.0),
           decoration: BoxDecoration(borderRadius: BorderRadius.circular(15)),
           child: Column(
             children: [
@@ -114,10 +114,13 @@ class _QuestionsState extends State<Questions> {
                     .headline5
                     ?.copyWith(color: Colors.black),
               ),
-              Lottie.asset(
-                questionsList[questionIndex]['icon'],
-                height: 250.sp,
-                width: 250.sp,
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Lottie.asset(
+                  questionsList[questionIndex]['icon'],
+                  height: 220.sp,
+                  width: 220.sp,
+                ),
               ),
               Expanded(
                 child: ListView.builder(
