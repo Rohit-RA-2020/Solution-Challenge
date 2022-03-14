@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:reduce_footprint/Screens/questions.dart';
+import 'package:reduce_footprint/store.dart';
 import '../constants.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -13,6 +14,7 @@ class GettingStarted extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    email = user.email;
     return Scaffold(
       body: SafeArea(
         child: Stack(

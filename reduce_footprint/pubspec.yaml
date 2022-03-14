@@ -45,6 +45,7 @@ dependencies:
   lottie: ^1.2.1
   dio: ^4.0.4
   syncfusion_flutter_charts: ^19.4.55
+  cloud_firestore: ^3.1.10
 
 dev_dependencies:
   flutter_test:

@@ -9,6 +9,7 @@ import 'package:reduce_footprint/constants.dart';
 import 'package:reduce_footprint/models/questions_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:reduce_footprint/store.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Questions extends StatefulWidget {
   const Questions({Key? key}) : super(key: key);
@@ -22,6 +23,13 @@ class _QuestionsState extends State<Questions> {
   late int? selectedOption = 100;
 
   var responses = <String, int>{};
+  late CollectionReference _collectionReference;
+
+  @override
+  void initState() {
+    _collectionReference = FirebaseFirestore.instance.collection(email!);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,10 +90,11 @@ class _QuestionsState extends State<Questions> {
                         'https://carbonfootprint-api.herokuapp.com/calculate',
                         data: responses);
                     print(results.data);
+                    await _collectionReference.add(responses);
                     Navigator.pushReplacement(
                       context,
                       CupertinoPageRoute(
-                        builder: (context) =>const Result(),
+                        builder: (context) => const Result(),
                       ),
                     );
                   },
