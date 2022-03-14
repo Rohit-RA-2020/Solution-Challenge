@@ -90,7 +90,7 @@ class _QuestionsState extends State<Questions> {
                         'https://carbonfootprint-api.herokuapp.com/calculate',
                         data: responses);
                     print(results.data);
-                    await _collectionReference.add(responses);
+                    await _collectionReference.doc('responses').set(responses);
                     Navigator.pushReplacement(
                       context,
                       CupertinoPageRoute(
