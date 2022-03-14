@@ -1,11 +1,14 @@
+// ignore_for_file: avoid_print
+
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:reduce_footprint/Screens/login/result.dart';
+import 'package:reduce_footprint/Screens/result.dart';
 import 'package:reduce_footprint/constants.dart';
 import 'package:reduce_footprint/models/questions_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:reduce_footprint/store.dart';
 
 class Questions extends StatefulWidget {
   const Questions({Key? key}) : super(key: key);
@@ -75,14 +78,14 @@ class _QuestionsState extends State<Questions> {
                   backgroundColor: kPrimaryColor,
                   onPressed: () async {
                     var dio = Dio();
-                    var result = await dio.post(
+                    results = await dio.post(
                         'https://carbonfootprint-api.herokuapp.com/calculate',
                         data: responses);
-
+                    print(results.data);
                     Navigator.pushReplacement(
                       context,
                       CupertinoPageRoute(
-                        builder: (context) => Result(result: result),
+                        builder: (context) =>const Result(),
                       ),
                     );
                   },
@@ -94,8 +97,7 @@ class _QuestionsState extends State<Questions> {
       body: SafeArea(
         child: Container(
           width: double.infinity,
-          margin:
-              const EdgeInsets.symmetric(horizontal: 10.0),
+          margin: const EdgeInsets.symmetric(horizontal: 10.0),
           padding: const EdgeInsets.all(10.0),
           decoration: BoxDecoration(borderRadius: BorderRadius.circular(15)),
           child: Column(

@@ -44,7 +44,7 @@ const List questionsList = [
   {
     "id": 4,
     "question": "Which kind of fuel do you use ?",
-    "options": ['Electric', 'Natural gas', 'Petrol, Disel'],
+    "options": ['Electric', 'Natural gas', 'Petrol, Diesel'],
     "icon" : "assets/lottie/fuel.json",
   },
   {
