@@ -46,6 +46,7 @@ dependencies:
   dio: ^4.0.4
   syncfusion_flutter_charts: ^19.4.55
   cloud_firestore: ^3.1.10
+  animated_bottom_navigation_bar: ^0.3.2
 
 dev_dependencies:
   flutter_test:

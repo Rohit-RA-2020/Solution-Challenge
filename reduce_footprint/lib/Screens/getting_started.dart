@@ -3,18 +3,33 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
+import 'package:reduce_footprint/Screens/dashboard.dart';
 import 'package:reduce_footprint/Screens/questions.dart';
 import 'package:reduce_footprint/store.dart';
 import '../constants.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class GettingStarted extends StatelessWidget {
+class GettingStarted extends StatefulWidget {
   const GettingStarted({Key? key, required this.user}) : super(key: key);
   final User user;
 
   @override
+  State<GettingStarted> createState() => _GettingStartedState();
+}
+
+class _GettingStartedState extends State<GettingStarted> {
+  late CollectionReference _collectionReference;
+
+  @override
+  void initState() {
+    _collectionReference = FirebaseFirestore.instance.collection(email!);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    email = user.email;
+    email = widget.user.email;
     return Scaffold(
       body: SafeArea(
         child: Stack(
@@ -37,7 +52,7 @@ class GettingStarted extends StatelessWidget {
                 SizedBox(
                   child: Center(
                     child: Text(
-                      'Welcome, ${user.displayName ?? 'User'}',
+                      'Welcome, ${widget.user.displayName ?? 'User'}',
                       style: GoogleFonts.kalam(fontSize: 22.sp),
                       textAlign: TextAlign.center,
                     ),
@@ -61,13 +76,24 @@ class GettingStarted extends StatelessWidget {
                       'Get Started',
                       style: TextStyle(fontSize: 18.sp),
                     ),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        CupertinoPageRoute(
-                          builder: (context) => const Questions(),
-                        ),
-                      );
+                    onPressed: () async {
+                      var userDocRef = _collectionReference.doc('responses');
+                      var doc = await userDocRef.get();
+                      if (doc.exists) {
+                        Navigator.push(
+                          context,
+                          CupertinoPageRoute(
+                            builder: (context) => const Dashboard(),
+                          ),
+                        );
+                      } else {
+                        Navigator.push(
+                          context,
+                          CupertinoPageRoute(
+                            builder: (context) => const Questions(),
+                          ),
+                        );
+                      }
                     },
                     style: ButtonStyle(
                       elevation: MaterialStateProperty.all<double>(10.0),
