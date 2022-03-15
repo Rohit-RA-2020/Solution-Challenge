@@ -1,5 +1,7 @@
 // ignore_for_file: avoid_print
 
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -89,8 +91,10 @@ class _QuestionsState extends State<Questions> {
                     results = await dio.post(
                         'https://carbonfootprint-api.herokuapp.com/calculate',
                         data: responses);
-                    print(results.data);
+                    Map<String, dynamic> result =
+                        json.decode(results.toString());
                     await _collectionReference.doc('responses').set(responses);
+                    await _collectionReference.doc('results').set(result);
                     Navigator.pushReplacement(
                       context,
                       CupertinoPageRoute(

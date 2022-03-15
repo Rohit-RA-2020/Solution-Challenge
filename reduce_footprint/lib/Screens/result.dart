@@ -23,7 +23,7 @@ class MyHomePage extends StatefulWidget {
 
 class MyHomePageState extends State<MyHomePage> {
   List<_CarbonData> data = [
-    _CarbonData('Your Emmission', double.parse(results.data['result'])),
+    _CarbonData('Your Emmission', results.data['result']),
     _CarbonData('Global Traget', 2.0)
   ];
   final List<ChartData> chartData = [

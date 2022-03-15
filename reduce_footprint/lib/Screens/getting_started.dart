@@ -23,13 +23,13 @@ class _GettingStartedState extends State<GettingStarted> {
 
   @override
   void initState() {
+    email = widget.user.email;
     _collectionReference = FirebaseFirestore.instance.collection(email!);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    email = widget.user.email;
     return Scaffold(
       body: SafeArea(
         child: Stack(

@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:reduce_footprint/constants.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
+
+import '../store.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -10,6 +12,14 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+  late CollectionReference _collectionReference;
+
+  @override
+  void initState() {
+    _collectionReference = FirebaseFirestore.instance.collection(email!);
+    super.initState();
+  }
+
   int _bottomNavIndex = 0;
   List<IconData> iconList = [
     Icons.home_outlined,
@@ -19,7 +29,6 @@ class _DashboardState extends State<Dashboard> {
   ];
   @override
   Widget build(BuildContext context) {
-    print(_bottomNavIndex);
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -29,6 +38,19 @@ class _DashboardState extends State<Dashboard> {
           style: TextStyle(color: Colors.black),
         ),
         backgroundColor: Colors.transparent,
+        actions: [
+          IconButton(
+            tooltip: 'Erase your responses',
+            onPressed: () async {
+              await _collectionReference.doc('responses').delete();
+              Navigator.pop(context);
+            },
+            icon: const Icon(
+              Icons.question_answer,
+              color: Colors.black,
+            ),
+          ),
+        ],
       ),
       body: const Center(
         child: Text('Dashboard Page'),
