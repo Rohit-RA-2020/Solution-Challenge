@@ -23,10 +23,18 @@ class _DashboardState extends State<Dashboard> {
   int _bottomNavIndex = 0;
   List<IconData> iconList = [
     Icons.home_outlined,
-    Icons.search_outlined,
-    Icons.notifications_outlined,
+    Icons.local_library_outlined,
+    Icons.library_books_outlined,
     Icons.person_outline,
   ];
+
+  static const List<Widget> _widgetOptions = <Widget>[
+    Home(),
+    Maps(),
+    Blogs(),
+    Profile(),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,19 +60,22 @@ class _DashboardState extends State<Dashboard> {
           ),
         ],
       ),
-      body: const Center(
-        child: Text('Dashboard Page'),
+      body: Center(
+        child: _widgetOptions.elementAt(_bottomNavIndex),
       ),
       floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.compost_outlined),
         backgroundColor: Colors.pink,
         onPressed: () {},
         //params
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: AnimatedBottomNavigationBar(
+        backgroundColor: Colors.black87,
         icons: iconList,
         splashColor: Colors.green,
-        activeColor: Colors.green,
+        inactiveColor: Colors.white,
+        activeColor: Colors.lightGreen,
         activeIndex: _bottomNavIndex,
         gapLocation: GapLocation.center,
         notchSmoothness: NotchSmoothness.verySmoothEdge,
@@ -73,6 +84,58 @@ class _DashboardState extends State<Dashboard> {
         onTap: (index) => setState(() => _bottomNavIndex = index),
         //other params
       ),
+    );
+  }
+}
+
+class Home extends StatelessWidget {
+  const Home({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const Text(
+      'Home Page',
+    );
+  }
+}
+
+class Maps extends StatelessWidget {
+  const Maps({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const Text(
+      'Maps Page',
+    );
+  }
+}
+
+class Blogs extends StatelessWidget {
+  const Blogs({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const Text(
+      'Blogs Page',
+    );
+  }
+}
+
+class Profile extends StatelessWidget {
+  const Profile({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const Text(
+      'Profile Page',
     );
   }
 }
