@@ -5,13 +5,14 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:reduce_footprint/screens/result.dart';
 import 'package:lottie/lottie.dart';
-import 'package:reduce_footprint/Screens/result.dart';
-import 'package:reduce_footprint/constants.dart';
-import 'package:reduce_footprint/models/questions_model.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:reduce_footprint/store.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+
+import '../resources/questions_model.dart';
+import '../utils/colors.dart';
+import '../utils/global_variable.dart';
 
 class Questions extends StatefulWidget {
   const Questions({Key? key}) : super(key: key);
@@ -29,7 +30,7 @@ class _QuestionsState extends State<Questions> {
 
   @override
   void initState() {
-    _collectionReference = FirebaseFirestore.instance.collection(email!);
+    _collectionReference = FirebaseFirestore.instance.collection(emaill!);
     super.initState();
   }
 
@@ -37,7 +38,7 @@ class _QuestionsState extends State<Questions> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(40.0.sp),
+        preferredSize: const Size.fromHeight(40.0),
         child: AppBar(
             automaticallyImplyLeading: false,
             backgroundColor: Colors.transparent,
@@ -117,8 +118,8 @@ class _QuestionsState extends State<Questions> {
             children: [
               Text(
                 '${questionIndex + 1}/${questionsList.length}',
-                style: TextStyle(
-                  fontSize: 16.sp,
+                style: const TextStyle(
+                  fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -133,15 +134,15 @@ class _QuestionsState extends State<Questions> {
                 padding: const EdgeInsets.all(8.0),
                 child: Lottie.asset(
                   questionsList[questionIndex]['icon'],
-                  height: 220.sp,
-                  width: 220.sp,
+                  height: 220,
+                  width: 220,
                 ),
               ),
               Expanded(
                 child: ListView.builder(
                   itemCount: questionsList[questionIndex]['options'].length,
                   itemBuilder: (context, index) => Container(
-                    margin: EdgeInsets.all(4.h),
+                    margin: EdgeInsets.all(4),
                     decoration: BoxDecoration(
                       color: selectedOption == index ? Colors.lightGreen : null,
                       borderRadius: BorderRadius.circular(15),

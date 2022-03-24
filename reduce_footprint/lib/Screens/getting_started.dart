@@ -2,17 +2,16 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lottie/lottie.dart';
-import 'package:reduce_footprint/Screens/dashboard.dart';
-import 'package:reduce_footprint/Screens/questions.dart';
-import 'package:reduce_footprint/store.dart';
-import '../constants.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:reduce_footprint/responsive/mobile_screen_layout.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:reduce_footprint/screens/dashboard.dart';
+import 'package:reduce_footprint/screens/questions.dart';
+import 'package:reduce_footprint/utils/global_variable.dart';
+import 'package:lottie/lottie.dart';
 
 class GettingStarted extends StatefulWidget {
-  const GettingStarted({Key? key, required this.user}) : super(key: key);
-  final User user;
+  const GettingStarted({Key? key, this.user}) : super(key: key);
+  final User? user;
 
   @override
   State<GettingStarted> createState() => _GettingStartedState();
@@ -23,8 +22,8 @@ class _GettingStartedState extends State<GettingStarted> {
 
   @override
   void initState() {
-    email = widget.user.email;
-    _collectionReference = FirebaseFirestore.instance.collection(email!);
+    // email = widget.user.email;
+    _collectionReference = FirebaseFirestore.instance.collection(emaill!);
     super.initState();
   }
 
@@ -42,18 +41,18 @@ class _GettingStartedState extends State<GettingStarted> {
                 height: 200,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(100),
-                    color: kPrimaryColor),
+                    color: Colors.green),
               ),
             ),
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                SizedBox(height: 130.sp),
+                SizedBox(height: 130),
                 SizedBox(
                   child: Center(
                     child: Text(
-                      'Welcome, ${widget.user.displayName ?? 'User'}',
-                      style: GoogleFonts.kalam(fontSize: 22.sp),
+                      'Welcome, User',
+                      style: GoogleFonts.kalam(fontSize: 22),
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -62,19 +61,19 @@ class _GettingStartedState extends State<GettingStarted> {
                   child: Center(
                     child: Text(
                       'Before we continue, Please answer some questions',
-                      style: GoogleFonts.kalam(fontSize: 20.sp),
+                      style: GoogleFonts.kalam(fontSize: 20),
                       textAlign: TextAlign.center,
                     ),
                   ),
                 ),
                 Lottie.asset('assets/lottie/loading.json'),
                 SizedBox(
-                  height: 70.sp,
-                  width: 200.sp,
+                  height: 70,
+                  width: 200,
                   child: ElevatedButton(
-                    child: Text(
+                    child: const Text(
                       'Get Started',
-                      style: TextStyle(fontSize: 18.sp),
+                      style: TextStyle(fontSize: 18),
                     ),
                     onPressed: () async {
                       var userDocRef = _collectionReference.doc('responses');
@@ -97,7 +96,7 @@ class _GettingStartedState extends State<GettingStarted> {
                     },
                     style: ButtonStyle(
                       elevation: MaterialStateProperty.all<double>(10.0),
-                      backgroundColor: MaterialStateProperty.all(kPrimaryColor),
+                      backgroundColor: MaterialStateProperty.all(Colors.green),
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(40.0),
@@ -107,7 +106,7 @@ class _GettingStartedState extends State<GettingStarted> {
                     ),
                   ),
                 ),
-                SizedBox(height: 50.sp),
+                const SizedBox(height: 50),
               ],
             ),
           ],

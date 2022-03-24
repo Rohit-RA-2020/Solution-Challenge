@@ -1,8 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
-
-import '../store.dart';
+import 'package:reduce_footprint/resources/auth_methods.dart';
+import 'package:reduce_footprint/responsive/mobile_screen_layout.dart';
+import 'package:reduce_footprint/screens/profile_screen.dart';
+import 'package:reduce_footprint/utils/global_variable.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -16,7 +19,7 @@ class _DashboardState extends State<Dashboard> {
 
   @override
   void initState() {
-    _collectionReference = FirebaseFirestore.instance.collection(email!);
+    _collectionReference = FirebaseFirestore.instance.collection(emaill!);
     super.initState();
   }
 
@@ -28,16 +31,19 @@ class _DashboardState extends State<Dashboard> {
     Icons.person_outline,
   ];
 
-  static const List<Widget> _widgetOptions = <Widget>[
-    Home(),
-    Maps(),
-    Blogs(),
-    Profile(),
+  final List<Widget> _widgetOptions = <Widget>[
+    const Home(),
+    const Maps(),
+    const Blogs(),
+    ProfileScreen(
+      uid: FirebaseAuth.instance.currentUser!.uid,
+    ),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFfffcf5),
       appBar: AppBar(
         automaticallyImplyLeading: false,
         elevation: 0,
@@ -58,6 +64,14 @@ class _DashboardState extends State<Dashboard> {
               color: Colors.black,
             ),
           ),
+          IconButton(
+            tooltip: 'Help',
+            onPressed: () {},
+            icon: const Icon(
+              Icons.help_outline,
+              color: Colors.black,
+            ),
+          ),
         ],
       ),
       body: Center(
@@ -66,7 +80,12 @@ class _DashboardState extends State<Dashboard> {
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.compost_outlined),
         backgroundColor: Colors.pink,
-        onPressed: () {},
+        onPressed: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const MobileScreenLayout(),
+          ),
+        ),
         //params
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -97,6 +116,9 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Text(
       'Home Page',
+      style: TextStyle(
+        color: Colors.black,
+      ),
     );
   }
 }
@@ -110,6 +132,9 @@ class Maps extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Text(
       'Maps Page',
+      style: TextStyle(
+        color: Colors.black,
+      ),
     );
   }
 }
@@ -123,6 +148,9 @@ class Blogs extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Text(
       'Blogs Page',
+      style: TextStyle(
+        color: Colors.black,
+      ),
     );
   }
 }
@@ -136,6 +164,9 @@ class Profile extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Text(
       'Profile Page',
+      style: TextStyle(
+        color: Colors.black,
+      ),
     );
   }
 }

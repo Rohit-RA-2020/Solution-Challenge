@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:reduce_footprint/Screens/dashboard.dart';
-import 'package:reduce_footprint/constants.dart';
-import 'package:reduce_footprint/store.dart';
+import 'package:reduce_footprint/screens/dashboard.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import '../utils/colors.dart';
+import '../utils/global_variable.dart';
 
 class Result extends StatelessWidget {
   const Result({Key? key}) : super(key: key);
