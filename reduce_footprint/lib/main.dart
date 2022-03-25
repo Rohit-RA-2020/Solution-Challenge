@@ -5,10 +5,8 @@ import 'package:reduce_footprint/providers/user_provider.dart';
 import 'package:reduce_footprint/responsive/responsive_layout.dart';
 import 'package:reduce_footprint/responsive/web_screen_layout.dart';
 import 'package:reduce_footprint/screens/getting_started.dart';
-import 'package:reduce_footprint/screens/login_screen.dart';
-import 'package:reduce_footprint/utils/colors.dart';
-import 'package:reduce_footprint/utils/global_variable.dart';
 import 'package:provider/provider.dart';
+import 'Screens/login/login.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,7 +23,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    emaill = FirebaseAuth.instance.currentUser?.email;
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
@@ -40,7 +37,8 @@ class MyApp extends StatelessWidget {
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.active) {
               // Checking if the snapshot has any data or not
-              if (snapshot.hasData) {
+              if (snapshot.hasData &&
+                  FirebaseAuth.instance.currentUser != null) {
                 // if snapshot has data which means user is logged in then we check the width of screen and accordingly display the screen layout
                 return const ResponsiveLayout(
                   mobileScreenLayout: GettingStarted(),
@@ -56,11 +54,13 @@ class MyApp extends StatelessWidget {
             // means connection to future hasnt been made yet
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(
-                child: CircularProgressIndicator(),
+                child: CircularProgressIndicator(
+                  color: Colors.green,
+                ),
               );
             }
 
-            return const LoginScreen();
+            return const LogScreen();
           },
         ),
       ),

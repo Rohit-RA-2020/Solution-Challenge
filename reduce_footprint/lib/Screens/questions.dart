@@ -3,6 +3,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:reduce_footprint/screens/result.dart';
@@ -30,7 +31,8 @@ class _QuestionsState extends State<Questions> {
 
   @override
   void initState() {
-    _collectionReference = FirebaseFirestore.instance.collection(emaill!);
+    _collectionReference = FirebaseFirestore.instance
+        .collection(FirebaseAuth.instance.currentUser!.email!);
     super.initState();
   }
 
@@ -142,7 +144,7 @@ class _QuestionsState extends State<Questions> {
                 child: ListView.builder(
                   itemCount: questionsList[questionIndex]['options'].length,
                   itemBuilder: (context, index) => Container(
-                    margin: EdgeInsets.all(4),
+                    margin: const EdgeInsets.all(4),
                     decoration: BoxDecoration(
                       color: selectedOption == index ? Colors.lightGreen : null,
                       borderRadius: BorderRadius.circular(15),

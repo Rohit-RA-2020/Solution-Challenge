@@ -1,8 +1,9 @@
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:reduce_footprint/Auth/auth.dart';
-import 'package:reduce_footprint/Auth/facebook_auth.dart';
-import 'package:reduce_footprint/Auth/google_auth.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:reduce_footprint/resources/auth_methods.dart';
+import 'package:reduce_footprint/utils/global_variable.dart';
+import 'package:reduce_footprint/utils/utils.dart';
 import '../../../constants.dart';
 
 class RegisterForm extends StatefulWidget {
@@ -24,8 +25,56 @@ class RegisterForm extends StatefulWidget {
 }
 
 class _RegisterFormState extends State<RegisterForm> {
+  final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _bioController = TextEditingController();
+  bool _isLoading = false;
+  Uint8List? _image;
+
+  @override
+  void dispose() {
+    super.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _usernameController.dispose();
+  }
+
+  void signUpUser() async {
+    nameStarted = _usernameController.text;
+
+    // set loading to true
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
+      await AuthMethods().signUpUser(
+          email: _emailController.text,
+          password: _passwordController.text,
+          username: _usernameController.text,
+          bio: _bioController.text,
+          file: _image!);
+      setState(() {
+        _isLoading = false;
+        showSnackBar(context, 'User created successfully');
+      });
+    } catch (e) {
+      setState(() {
+        _isLoading = false;
+      });
+      // show the error
+      showSnackBar(context, e.toString());
+    }
+  }
+
+  selectImage() async {
+    Uint8List im = await pickImage(ImageSource.gallery);
+    // set state because we need to display the image we selected on the circle avatar
+    setState(() {
+      _image = im;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,8 +99,48 @@ class _RegisterFormState extends State<RegisterForm> {
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
                   ),
                   const SizedBox(height: 20),
-                  Image.asset('assets/images/nature1.png', height: 200),
+                  Stack(
+                    children: [
+                      _image != null
+                          ? CircleAvatar(
+                              radius: 64,
+                              backgroundImage: MemoryImage(_image!),
+                              backgroundColor: Colors.red,
+                            )
+                          : const CircleAvatar(
+                              radius: 64,
+                              backgroundImage: NetworkImage(
+                                  'https://i.stack.imgur.com/l60Hf.png'),
+                              backgroundColor: Colors.red,
+                            ),
+                      Positioned(
+                        bottom: -10,
+                        left: 80,
+                        child: IconButton(
+                          onPressed: selectImage,
+                          icon: const Icon(Icons.add_a_photo),
+                        ),
+                      )
+                    ],
+                  ),
                   const SizedBox(height: 30),
+                  Container(
+                    margin: const EdgeInsets.symmetric(vertical: 10),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                    width: widget.size.width * 0.8,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color: kPrimaryColor.withAlpha(50)),
+                    child: TextField(
+                      controller: _usernameController,
+                      cursorColor: kPrimaryColor,
+                      decoration: const InputDecoration(
+                          icon: Icon(Icons.person, color: kPrimaryColor),
+                          hintText: 'User Name',
+                          border: InputBorder.none),
+                    ),
+                  ),
                   Container(
                     margin: const EdgeInsets.symmetric(vertical: 10),
                     padding:
@@ -78,7 +167,7 @@ class _RegisterFormState extends State<RegisterForm> {
                         borderRadius: BorderRadius.circular(30),
                         color: kPrimaryColor.withAlpha(50)),
                     child: TextField(
-                      controller: _passwController,
+                      controller: _passwordController,
                       cursorColor: kPrimaryColor,
                       obscureText: true,
                       decoration: const InputDecoration(
@@ -87,17 +176,26 @@ class _RegisterFormState extends State<RegisterForm> {
                           border: InputBorder.none),
                     ),
                   ),
+                  Container(
+                    margin: const EdgeInsets.symmetric(vertical: 10),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                    width: widget.size.width * 0.8,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color: kPrimaryColor.withAlpha(50)),
+                    child: TextField(
+                      controller: _bioController,
+                      cursorColor: kPrimaryColor,
+                      decoration: const InputDecoration(
+                          icon: Icon(Icons.abc, color: kPrimaryColor),
+                          hintText: 'Bio',
+                          border: InputBorder.none),
+                    ),
+                  ),
                   const SizedBox(height: 10),
                   InkWell(
-                    onTap: () {
-                      Authentication(
-                        context: context,
-                        email: _emailController.text,
-                        password: _passwController.text,
-                      ).signUp();
-                      _emailController.clear();
-                      _passwController.clear();
-                    },
+                    onTap: signUpUser,
                     borderRadius: BorderRadius.circular(30),
                     child: Container(
                       width: widget.size.width * 0.8,
@@ -112,39 +210,6 @@ class _RegisterFormState extends State<RegisterForm> {
                         style: TextStyle(color: Colors.white, fontSize: 18),
                       ),
                     ),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.only(top: 8.0),
-                    child: Text('OR',
-                        style: TextStyle(
-                            color: kPrimaryColor, fontWeight: FontWeight.bold)),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.only(bottom: 10.0, top: 8.0),
-                    child: Text('Sign-Up Using',
-                        style: TextStyle(
-                            color: kPrimaryColor, fontWeight: FontWeight.bold)),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      const SizedBox(width: 60),
-                      InkWell(
-                          onTap: () {
-                            GoogleSignInProvider(
-                              context: context,
-                            ).googleLogin();
-                          },
-                          child: SvgPicture.asset('assets/logo/google.svg',
-                              height: 40)),
-                      InkWell(
-                          onTap: () {
-                            FacebookSignProvider().signInWithFacebook(context);
-                          },
-                          child: SvgPicture.asset('assets/logo/facebook.svg',
-                              height: 50)),
-                      const SizedBox(width: 60),
-                    ],
                   ),
                   const SizedBox(height: 10),
                 ],

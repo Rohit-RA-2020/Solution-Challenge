@@ -4,14 +4,14 @@ import 'package:reduce_footprint/Screens/login/components/login_form.dart';
 import 'package:reduce_footprint/Screens/login/components/register_form.dart';
 import 'package:reduce_footprint/constants.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class LogScreen extends StatefulWidget {
+  const LogScreen({Key? key}) : super(key: key);
 
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _LogScreenState createState() => _LogScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen>
+class _LogScreenState extends State<LogScreen>
     with SingleTickerProviderStateMixin {
   bool isLogin = true;
   Animation<double>? containerSize;

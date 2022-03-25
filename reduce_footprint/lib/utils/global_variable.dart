@@ -4,8 +4,8 @@ import 'package:reduce_footprint/screens/feed_screen.dart';
 import 'package:reduce_footprint/screens/search_screen.dart';
 
 const webScreenSize = 600;
-String? emaill;
 var results;
+String? nameStarted;
 
 List<Widget> homeScreenItems = [
   const FeedScreen(),

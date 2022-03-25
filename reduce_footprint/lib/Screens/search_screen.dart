@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:reduce_footprint/screens/profile_screen.dart';
-import 'package:reduce_footprint/utils/colors.dart';
 import 'package:reduce_footprint/utils/global_variable.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -22,7 +21,7 @@ class _SearchScreenState extends State<SearchScreen> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         elevation: 0,
-        backgroundColor: mobileBackgroundColor,
+        backgroundColor: Colors.transparent,
         title: Form(
           child: TextFormField(
             controller: searchController,

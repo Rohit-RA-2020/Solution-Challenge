@@ -2,10 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
-import 'package:reduce_footprint/resources/auth_methods.dart';
 import 'package:reduce_footprint/responsive/mobile_screen_layout.dart';
 import 'package:reduce_footprint/screens/profile_screen.dart';
-import 'package:reduce_footprint/utils/global_variable.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -19,7 +17,8 @@ class _DashboardState extends State<Dashboard> {
 
   @override
   void initState() {
-    _collectionReference = FirebaseFirestore.instance.collection(emaill!);
+    _collectionReference = FirebaseFirestore.instance
+        .collection(FirebaseAuth.instance.currentUser!.email!);
     super.initState();
   }
 
@@ -49,7 +48,7 @@ class _DashboardState extends State<Dashboard> {
         elevation: 0,
         title: const Text(
           'Become a enviroment hero',
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: Colors.black, fontSize: 19),
         ),
         backgroundColor: Colors.transparent,
         actions: [

@@ -1,13 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:reduce_footprint/resources/auth_methods.dart';
 import 'package:reduce_footprint/resources/firestore_methods.dart';
-import 'package:reduce_footprint/screens/login_screen.dart';
 import 'package:reduce_footprint/utils/colors.dart';
 import 'package:reduce_footprint/utils/utils.dart';
 import 'package:reduce_footprint/widgets/follow_button.dart';
+
+import 'login/login.dart';
 
 class ProfileScreen extends StatefulWidget {
   final String uid;
@@ -73,6 +73,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: CircularProgressIndicator(),
           )
         : Scaffold(
+            backgroundColor: Colors.transparent,
             body: ListView(
               children: [
                 Padding(
@@ -120,7 +121,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                   .pushReplacement(
                                                 MaterialPageRoute(
                                                   builder: (context) =>
-                                                      const LoginScreen(),
+                                                      const LogScreen(),
                                                 ),
                                               );
                                             },

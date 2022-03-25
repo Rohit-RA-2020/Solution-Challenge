@@ -5,7 +5,6 @@ import 'package:reduce_footprint/providers/user_provider.dart';
 import 'package:reduce_footprint/resources/firestore_methods.dart';
 import 'package:reduce_footprint/screens/comments_screen.dart';
 import 'package:reduce_footprint/utils/colors.dart';
-import 'package:reduce_footprint/utils/global_variable.dart';
 import 'package:reduce_footprint/utils/utils.dart';
 import 'package:reduce_footprint/widgets/like_animation.dart';
 import 'package:intl/intl.dart';
@@ -63,7 +62,6 @@ class _PostCardState extends State<PostCard> {
   @override
   Widget build(BuildContext context) {
     final model.User user = Provider.of<UserProvider>(context).getUser;
-    final width = MediaQuery.of(context).size.width;
 
     return Container(
       // boundary needed for web

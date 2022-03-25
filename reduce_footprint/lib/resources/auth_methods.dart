@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:reduce_footprint/models/user.dart' as model;
 import 'package:reduce_footprint/resources/storage_methods.dart';
-import 'package:reduce_footprint/utils/global_variable.dart';
 
 class AuthMethods {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -21,7 +20,7 @@ class AuthMethods {
 
   // Signing Up User
 
-  Future<String> signUpUser({
+  Future signUpUser({
     required String email,
     required String password,
     required String username,
@@ -67,7 +66,7 @@ class AuthMethods {
     } catch (err) {
       return err.toString();
     }
-    return res;
+    //return res;
   }
 
   // logging in user
@@ -83,7 +82,6 @@ class AuthMethods {
           email: email,
           password: password,
         );
-        emaill = email;
         res = "success";
       } else {
         res = "Please enter all the fields";
