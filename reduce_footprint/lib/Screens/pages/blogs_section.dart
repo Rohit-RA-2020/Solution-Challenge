@@ -23,88 +23,91 @@ class _BlogsState extends State<Blogs> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      physics: const BouncingScrollPhysics(),
-      itemCount: blogPost.length,
-      itemBuilder: (context, index) {
-        //Map blog = blogPost[index];
-        return GestureDetector(
-          onTap: () {
-            _launchURL(blogPost[index].link);
-          },
-          child: Stack(
-            children: <Widget>[
-              Container(
-                width: 90,
-                height: 90,
-                color: bgColor,
-              ),
-              Container(
-                color: Colors.white,
-                padding: const EdgeInsets.all(12.0),
-                margin: const EdgeInsets.all(12.0),
-                child: Row(
+    return blogPost.isEmpty
+        ? const CircularProgressIndicator()
+        : ListView.builder(
+            physics: const BouncingScrollPhysics(),
+            itemCount: blogPost.length,
+            itemBuilder: (context, index) {
+              //Map blog = blogPost[index];
+              return GestureDetector(
+                onTap: () {
+                  _launchURL(blogPost[index].link);
+                },
+                child: Stack(
                   children: <Widget>[
                     Container(
-                      height: 100,
-                      color: Colors.transparent,
-                      width: 100.0,
-                      child: Image.network(
-                        blogPost[index].image,
-                      ),
+                      width: 90,
+                      height: 90,
+                      color: bgColor,
                     ),
-                    const SizedBox(width: 20.0),
-                    Expanded(
-                      child: Column(
+                    Container(
+                      color: Colors.white,
+                      padding: const EdgeInsets.all(12.0),
+                      margin: const EdgeInsets.all(12.0),
+                      child: Row(
                         children: <Widget>[
-                          Text(
-                            blogPost[index].title,
-                            textAlign: TextAlign.justify,
-                            style: TextStyle(
-                              color: secondaryColor,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18.0,
+                          Container(
+                            height: 100,
+                            color: Colors.transparent,
+                            width: 100.0,
+                            child: Image.network(
+                              blogPost[index].image,
                             ),
                           ),
-                          const SizedBox(height: 10.0),
-                          Text.rich(
-                            TextSpan(
-                              children: [
-                                WidgetSpan(
-                                  child: CircleAvatar(
-                                    radius: 15.0,
-                                    backgroundColor: primaryColor,
+                          const SizedBox(width: 20.0),
+                          Expanded(
+                            child: Column(
+                              children: <Widget>[
+                                Text(
+                                  blogPost[index].title,
+                                  textAlign: TextAlign.justify,
+                                  style: TextStyle(
+                                    color: secondaryColor,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18.0,
                                   ),
                                 ),
-                                const WidgetSpan(
-                                  child: SizedBox(width: 5.0, height: 5),
-                                ),
-                                TextSpan(
-                                    text: blogPost[index].author,
-                                    style: const TextStyle(fontSize: 16.0)),
-                                const WidgetSpan(
-                                  child: SizedBox(width: 20.0),
-                                ),
-                                const WidgetSpan(
-                                  child: SizedBox(width: 35.0),
-                                ),
-                                TextSpan(
-                                  text: blogPost[index].desc,
+                                const SizedBox(height: 10.0),
+                                Text.rich(
+                                  TextSpan(
+                                    children: [
+                                      WidgetSpan(
+                                        child: CircleAvatar(
+                                          radius: 15.0,
+                                          backgroundColor: primaryColor,
+                                        ),
+                                      ),
+                                      const WidgetSpan(
+                                        child: SizedBox(width: 5.0, height: 5),
+                                      ),
+                                      TextSpan(
+                                          text: blogPost[index].author,
+                                          style:
+                                              const TextStyle(fontSize: 16.0)),
+                                      const WidgetSpan(
+                                        child: SizedBox(width: 20.0),
+                                      ),
+                                      const WidgetSpan(
+                                        child: SizedBox(width: 35.0),
+                                      ),
+                                      TextSpan(
+                                        text: blogPost[index].desc,
+                                      ),
+                                    ],
+                                  ),
+                                  style: const TextStyle(height: 2.0),
                                 ),
                               ],
                             ),
-                            style: const TextStyle(height: 2.0),
-                          ),
+                          )
                         ],
                       ),
                     )
                   ],
                 ),
-              )
-            ],
-          ),
-        );
-      },
-    );
+              );
+            },
+          );
   }
 }

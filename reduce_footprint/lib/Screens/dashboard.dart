@@ -4,13 +4,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:reduce_footprint/Screens/pages/blogs_section.dart';
+import 'package:reduce_footprint/Screens/pages/maps_section.dart';
 import 'package:reduce_footprint/models/blogs_model.dart';
 import 'package:reduce_footprint/responsive/mobile_screen_layout.dart';
 import 'package:reduce_footprint/screens/profile_screen.dart';
 
 import '../store.dart';
-
-
 
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -38,7 +37,6 @@ class _DashboardState extends State<Dashboard> {
     });
 
     blogPost = blogPostFromJson(jsonRespose!);
-
   }
 
   @override
@@ -57,6 +55,13 @@ class _DashboardState extends State<Dashboard> {
     Icons.person_outline,
   ];
 
+  final List<String> appTitle = [
+    'Become a enviroment hero',
+    'Explore local events',
+    'Read blogs',
+    'Profile',
+  ];
+
   final List<Widget> _widgetOptions = <Widget>[
     const Home(),
     const Maps(),
@@ -73,9 +78,9 @@ class _DashboardState extends State<Dashboard> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         elevation: 0,
-        title: const Text(
-          'Become a enviroment hero',
-          style: TextStyle(color: Colors.black, fontSize: 19),
+        title: Text(
+          appTitle[_bottomNavIndex],
+          style: const TextStyle(color: Colors.black, fontSize: 19),
         ),
         backgroundColor: Colors.transparent,
         actions: [
@@ -148,24 +153,6 @@ class Home extends StatelessWidget {
     );
   }
 }
-
-class Maps extends StatelessWidget {
-  const Maps({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return const Text(
-      'Maps Page',
-      style: TextStyle(
-        color: Colors.black,
-      ),
-    );
-  }
-}
-
-
 
 class Profile extends StatelessWidget {
   const Profile({
