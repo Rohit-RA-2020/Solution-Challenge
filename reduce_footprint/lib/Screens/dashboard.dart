@@ -1,9 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
+import 'package:reduce_footprint/Screens/pages/blogs_section.dart';
+import 'package:reduce_footprint/models/blogs_model.dart';
 import 'package:reduce_footprint/responsive/mobile_screen_layout.dart';
 import 'package:reduce_footprint/screens/profile_screen.dart';
+
+import '../store.dart';
+
+
 
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -15,10 +22,30 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   late CollectionReference _collectionReference;
 
+  void apiCall() async {
+    String? jsonRespose;
+    var dio = Dio();
+    await dio
+        .get('https://carbonfootprint-api.herokuapp.com/blogs',
+            options: Options(responseType: ResponseType.plain, headers: {
+              'Content-Type': 'application/json;charset=UTF-8',
+              'Charset': 'utf-8'
+            }))
+        .then((response) {
+      setState(() {
+        jsonRespose = response.data.toString();
+      });
+    });
+
+    blogPost = blogPostFromJson(jsonRespose!);
+
+  }
+
   @override
   void initState() {
     _collectionReference = FirebaseFirestore.instance
         .collection(FirebaseAuth.instance.currentUser!.email!);
+    apiCall();
     super.initState();
   }
 
@@ -138,21 +165,7 @@ class Maps extends StatelessWidget {
   }
 }
 
-class Blogs extends StatelessWidget {
-  const Blogs({
-    Key? key,
-  }) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return const Text(
-      'Blogs Page',
-      style: TextStyle(
-        color: Colors.black,
-      ),
-    );
-  }
-}
 
 class Profile extends StatelessWidget {
   const Profile({

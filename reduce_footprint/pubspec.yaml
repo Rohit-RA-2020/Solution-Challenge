@@ -53,6 +53,7 @@ dependencies:
   provider: ^6.0.1
   uuid: ^3.0.5
   animated_bottom_navigation_bar: ^0.3.2
+  url_launcher: ^6.0.20
 
 dev_dependencies:
   flutter_test:
@@ -82,7 +83,6 @@ flutter:
   #   - images/a_dot_ham.jpeg
   assets:
     - assets/images/
-    - assets/logo/
     - assets/lottie/
 
   # An image asset can refer to one or more resolution-specific "variants", see

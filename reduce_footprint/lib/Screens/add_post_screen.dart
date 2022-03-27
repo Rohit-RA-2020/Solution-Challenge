@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:reduce_footprint/providers/user_provider.dart';
 import 'package:reduce_footprint/resources/firestore_methods.dart';
-import 'package:reduce_footprint/utils/colors.dart';
 import 'package:reduce_footprint/utils/utils.dart';
 import 'package:provider/provider.dart';
 
