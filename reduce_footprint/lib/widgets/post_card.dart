@@ -274,6 +274,9 @@ class _PostCardState extends State<PostCard> {
                         ),
                         TextSpan(
                           text: ' ${widget.snap['description']}',
+                          style: const TextStyle(
+                            color: Color(0xFF6B6E70),
+                          ),
                         ),
                       ],
                     ),

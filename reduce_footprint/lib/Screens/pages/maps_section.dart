@@ -17,18 +17,45 @@ class _MapsState extends State<Maps> {
   final Set<Marker> _markers = {};
 
   void getLocation() async {
-    var location = await currentLocation.getLocation();
+    //var location = await currentLocation.getLocation();
     currentLocation.onLocationChanged.listen((LocationData loc) {
-      _controller
-          ?.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
+      _controller?.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
         target: LatLng(loc.latitude ?? 0.0, loc.longitude ?? 0.0),
         zoom: 12.0,
       )));
       setState(() {
         _markers.add(Marker(
+            draggable: true,
+            flat: true,
+            infoWindow: const InfoWindow(title: 'Your Current Location'),
             markerId: const MarkerId('Home'),
             position: LatLng(loc.latitude ?? 0.0, loc.longitude ?? 0.0)));
+
+        _markers.add(Marker(
+            draggable: true,
+            icon: BitmapDescriptor.defaultMarkerWithHue(300),
+            flat: true,
+            markerId: const MarkerId('Venue'),
+            infoWindow: const InfoWindow(
+                title: 'Seminar', snippet: "Global Warming Discussion"),
+            position: const LatLng(21.1616, 79.0150)));
+        _markers.add(Marker(
+            draggable: true,
+            icon: BitmapDescriptor.defaultMarkerWithHue(180),
+            flat: true,
+            infoWindow: const InfoWindow(
+                title: 'Lake Cleaning', snippet: "Gorewada Lake Cleaning"),
+            markerId: const MarkerId('Venue1'),
+            position: const LatLng(21.2, 79.0150)));
       });
+      _markers.add(Marker(
+          draggable: true,
+          icon: BitmapDescriptor.defaultMarkerWithHue(180),
+          flat: true,
+          infoWindow: const InfoWindow(
+              title: 'Tree Plantation', snippet: "Nagpur City"),
+          markerId: const MarkerId('Venue2'),
+          position: const LatLng(21.161, 79.1050)));
     });
   }
 
@@ -43,21 +70,18 @@ class _MapsState extends State<Maps> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        child: GoogleMap(
-          zoomControlsEnabled: false,
-          initialCameraPosition: const CameraPosition(
-            target: LatLng(48.8561, 2.2930),
-            zoom: 12.0,
-          ),
-          onMapCreated: (GoogleMapController controller) {
-            _controller = controller;
-          },
-          markers: _markers,
+      body: GoogleMap(
+        zoomControlsEnabled: true,
+        initialCameraPosition: const CameraPosition(
+          target: LatLng(20.5937, 78.9629),
+          zoom: 12.0,
         ),
+        onMapCreated: (GoogleMapController controller) {
+          _controller = controller;
+        },
+        markers: _markers,
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
       floatingActionButton: FloatingActionButton(
         child: const Icon(
           Icons.location_searching,
