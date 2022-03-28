@@ -62,6 +62,7 @@ class _GettingStartedState extends State<GettingStarted> {
   @override
   Widget build(BuildContext context) {
     String name = userData['username'] ?? nameStarted;
+    nameStarted = name;
     return isLoading
         ? const Scaffold(
             body: Center(

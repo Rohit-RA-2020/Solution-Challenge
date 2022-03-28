@@ -4,10 +4,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:reduce_footprint/Screens/pages/blogs_section.dart';
+import 'package:reduce_footprint/Screens/pages/home_section.dart';
 import 'package:reduce_footprint/Screens/pages/maps_section.dart';
 import 'package:reduce_footprint/models/blogs_model.dart';
 import 'package:reduce_footprint/responsive/mobile_screen_layout.dart';
 import 'package:reduce_footprint/screens/profile_screen.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../store.dart';
 
@@ -73,6 +75,13 @@ class _DashboardState extends State<Dashboard> {
 
   @override
   Widget build(BuildContext context) {
+    var _url =
+        'https://docs.google.com/forms/d/e/1FAIpQLSfTrOXev2oIMr0Az1vVozF9MZQ-skkfW93xxAorywICMmye6g/viewform?usp=sf_link';
+
+    void _launchURL() async {
+      if (!await launch(_url)) throw 'Could not launch $_url';
+    }
+
     return Scaffold(
       backgroundColor: const Color(0xFFfffcf5),
       appBar: AppBar(
@@ -96,8 +105,8 @@ class _DashboardState extends State<Dashboard> {
             ),
           ),
           IconButton(
-            tooltip: 'Help',
-            onPressed: () {},
+            tooltip: 'Feedback',
+            onPressed: _launchURL,
             icon: const Icon(
               Icons.help_outline,
               color: Colors.black,
@@ -133,38 +142,6 @@ class _DashboardState extends State<Dashboard> {
         rightCornerRadius: 32,
         onTap: (index) => setState(() => _bottomNavIndex = index),
         //other params
-      ),
-    );
-  }
-}
-
-class Home extends StatelessWidget {
-  const Home({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return const Text(
-      'Home Page',
-      style: TextStyle(
-        color: Colors.black,
-      ),
-    );
-  }
-}
-
-class Profile extends StatelessWidget {
-  const Profile({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return const Text(
-      'Profile Page',
-      style: TextStyle(
-        color: Colors.black,
       ),
     );
   }
