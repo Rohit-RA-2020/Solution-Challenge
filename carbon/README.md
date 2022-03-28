@@ -1,6 +1,7 @@
 # footprint-api
 ## Deployed at https://carbonfootprint-api.herokuapp.com/
 ## To calculate, endpoint: https://carbonfootprint-api.herokuapp.com/calculate
+## To get recent blogs, endpoint: https://carbonfootprint-api.herokuapp.com/blogs
 
 
 ```json
