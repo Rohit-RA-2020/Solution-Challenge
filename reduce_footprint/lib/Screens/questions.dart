@@ -92,7 +92,7 @@ class _QuestionsState extends State<Questions> {
                   onPressed: () async {
                     var dio = Dio();
                     results = await dio.post(
-                        'https://carbonfootprint-api.herokuapp.com/calculate',
+                        'https://api-account-345807.el.r.appspot.com/calculate',
                         data: responses);
                     Map<String, dynamic> result =
                         json.decode(results.toString());

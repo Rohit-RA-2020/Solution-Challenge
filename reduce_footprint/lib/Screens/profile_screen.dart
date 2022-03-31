@@ -11,7 +11,9 @@ import 'login/login.dart';
 
 class ProfileScreen extends StatefulWidget {
   final String uid;
-  const ProfileScreen({Key? key, required this.uid}) : super(key: key);
+  final bool isSearch;
+  const ProfileScreen({Key? key, required this.uid, required this.isSearch})
+      : super(key: key);
 
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
@@ -73,7 +75,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: CircularProgressIndicator(),
           )
         : Scaffold(
-            backgroundColor: Colors.transparent,
+            backgroundColor:
+                widget.isSearch ? const Color(0XFFE5E5E5) : Colors.transparent,
             body: ListView(
               children: [
                 Padding(

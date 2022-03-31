@@ -27,7 +27,7 @@ class _DashboardState extends State<Dashboard> {
     String? jsonRespose;
     var dio = Dio();
     await dio
-        .get('https://carbonfootprint-api.herokuapp.com/blogs',
+        .get('https://api-account-345807.el.r.appspot.com/blogs',
             options: Options(responseType: ResponseType.plain, headers: {
               'Content-Type': 'application/json;charset=UTF-8',
               'Charset': 'utf-8'
@@ -70,6 +70,7 @@ class _DashboardState extends State<Dashboard> {
     const Blogs(),
     ProfileScreen(
       uid: FirebaseAuth.instance.currentUser!.uid,
+      isSearch: false,    
     ),
   ];
 
