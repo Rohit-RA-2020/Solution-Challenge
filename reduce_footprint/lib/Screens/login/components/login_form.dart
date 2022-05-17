@@ -68,88 +68,131 @@ class _LoginFormState extends State<LoginForm> {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedOpacity(
-      opacity: widget.isLogin ? 1.0 : 0.0,
-      duration: widget.animationDuration * 4,
-      child: Align(
-        alignment: Alignment.center,
-        child: SizedBox(
-          width: widget.size.width,
-          height: widget.defaultLoginSize,
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(
-                  'Welcome Back',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: SingleChildScrollView(
+        child: Container(
+          child: Column(
+            children: <Widget>[
+              Container(
+                height: 400,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage('assets/images/background.png'),
+                        fit: BoxFit.fill)),
+                child: Stack(
+                  children: <Widget>[
+                    Positioned(
+                      child: Container(
+                        margin: EdgeInsets.only(bottom: 150),
+                        child: Center(
+                          child: Text(
+                            "Welcome Back",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 40,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
                 ),
-                const SizedBox(height: 20),
-                Image.asset('assets/images/nature.png', height: 200),
-                const SizedBox(height: 20),
-                Container(
-                  margin: const EdgeInsets.symmetric(vertical: 10),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                  width: widget.size.width * 0.8,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: kPrimaryColor.withAlpha(50)),
-                  child: TextField(
-                    onEditingComplete: () {
-                      FocusScope.of(context).unfocus();
-                    },
-                    keyboardType: TextInputType.emailAddress,
-                    controller: _emailController,
-                    cursorColor: kPrimaryColor,
-                    decoration: const InputDecoration(
-                        icon: Icon(Icons.mail, color: kPrimaryColor),
-                        hintText: 'Email',
-                        border: InputBorder.none),
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.symmetric(vertical: 10),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                  width: widget.size.width * 0.8,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: kPrimaryColor.withAlpha(50)),
-                  child: TextField(
-                    keyboardType: TextInputType.visiblePassword,
-                    controller: _passwController,
-                    cursorColor: kPrimaryColor,
-                    obscureText: true,
-                    decoration: const InputDecoration(
-                      icon: Icon(Icons.lock, color: kPrimaryColor),
-                      hintText: 'Password',
-                      border: InputBorder.none,
+              ),
+              Padding(
+                padding: EdgeInsets.all(30.0),
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      padding: EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: [
+                            BoxShadow(
+                                color: Color.fromRGBO(143, 148, 251, .2),
+                                blurRadius: 20.0,
+                                offset: Offset(0, 10))
+                          ]),
+                      child: Column(
+                        children: <Widget>[
+                          Container(
+                            padding: EdgeInsets.all(8.0),
+                            decoration: BoxDecoration(
+                              border: Border(
+                                bottom: BorderSide(color: Colors.grey),
+                              ),
+                            ),
+                            child: TextField(
+                              onEditingComplete: () {
+                                FocusScope.of(context).unfocus();
+                              },
+                              keyboardType: TextInputType.emailAddress,
+                              controller: _emailController,
+                              cursorColor: kPrimaryColor,
+                              decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: "Email",
+                                hintStyle: TextStyle(
+                                  color: Colors.grey[400],
+                                ),
+                                icon: Icon(
+                                  Icons.mail,
+                                  color: kPrimaryColor,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.all(8.0),
+                            child: TextField(
+                              keyboardType: TextInputType.visiblePassword,
+                              controller: _passwController,
+                              cursorColor: kPrimaryColor,
+                              obscureText: true,
+                              decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: "Password",
+                                hintStyle: TextStyle(
+                                  color: Colors.grey[400],
+                                ),
+                                icon: Icon(
+                                  Icons.lock,
+                                  color: kPrimaryColor,
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                ),
-                const SizedBox(height: 10),
-                InkWell(
-                  onTap: loginUser,
-                  borderRadius: BorderRadius.circular(30),
-                  child: Container(
-                    width: widget.size.width * 0.8,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: kPrimaryColor,
+                    SizedBox(
+                      height: 30,
                     ),
-                    padding: const EdgeInsets.symmetric(vertical: 20),
-                    alignment: Alignment.center,
-                    child: const Text(
-                      'LOGIN',
-                      style: TextStyle(color: Colors.white, fontSize: 18),
+                    MaterialButton(
+                      onPressed: loginUser,
+                      child: Container(
+                        height: 50,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: kPrimaryColor,
+                        ),
+                        child: Center(
+                          child: Text(
+                            "Login",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, color: Colors.white),
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
+                    SizedBox(
+                      height: 70,
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 10),
-              ],
-            ),
+              )
+            ],
           ),
         ),
       ),
