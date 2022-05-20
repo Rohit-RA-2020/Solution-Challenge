@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:reduce_footprint/models/user.dart';
 import 'package:reduce_footprint/providers/user_provider.dart';
 import 'package:reduce_footprint/resources/firestore_methods.dart';
-import 'package:reduce_footprint/utils/colors.dart';
 import 'package:reduce_footprint/utils/utils.dart';
 import 'package:reduce_footprint/widgets/comment_card.dart';
 import 'package:provider/provider.dart';

@@ -20,7 +20,7 @@ class AuthMethods {
 
   // Signing Up User
 
-  Future signUpUser({
+  Future<String> signUpUser({
     required String email,
     required String password,
     required String username,
@@ -32,8 +32,7 @@ class AuthMethods {
       if (email.isNotEmpty ||
           password.isNotEmpty ||
           username.isNotEmpty ||
-          bio.isNotEmpty ||
-          file != null) {
+          bio.isNotEmpty) {
         // registering user in auth with email and password
         UserCredential cred = await _auth.createUserWithEmailAndPassword(
           email: email,
@@ -63,10 +62,10 @@ class AuthMethods {
       } else {
         res = "Please enter all the fields";
       }
-    } catch (err) {
+    } on FirebaseException catch (err) {
       return err.toString();
     }
-    //return res;
+    return res;
   }
 
   // logging in user

@@ -41,30 +41,29 @@ class _RegisterFormState extends State<RegisterForm> {
   }
 
   void signUpUser() async {
+    if (_image == null) {
+      showSnackBar(context, 'Plese select an image');
+      return;
+    }
     nameStarted = _usernameController.text;
 
     // set loading to true
     setState(() {
       _isLoading = true;
     });
-
-    try {
-      await AuthMethods().signUpUser(
-          email: _emailController.text,
-          password: _passwordController.text,
-          username: _usernameController.text,
-          bio: _bioController.text,
-          file: _image!);
+    String res = await AuthMethods().signUpUser(
+        email: _emailController.text,
+        password: _passwordController.text,
+        username: _usernameController.text,
+        bio: _bioController.text,
+        file: _image!);
+    if (res == 'sucess') {
       setState(() {
         _isLoading = false;
         showSnackBar(context, 'User created successfully');
       });
-    } catch (e) {
-      setState(() {
-        _isLoading = false;
-      });
-      // show the error
-      showSnackBar(context, e.toString());
+    } else {
+      showSnackBar(context, res);
     }
   }
 
