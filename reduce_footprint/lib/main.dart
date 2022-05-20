@@ -1,12 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:reduce_footprint/Screens/onBoarding/onboarding_screen.dart';
 import 'package:reduce_footprint/providers/user_provider.dart';
 import 'package:reduce_footprint/responsive/responsive_layout.dart';
 import 'package:reduce_footprint/responsive/web_screen_layout.dart';
 import 'package:reduce_footprint/screens/getting_started.dart';
 import 'package:provider/provider.dart';
-import 'Screens/login/login.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -60,7 +60,7 @@ class MyApp extends StatelessWidget {
               );
             }
 
-            return const LogScreen();
+            return const OnboardingScreen();
           },
         ),
       ),
