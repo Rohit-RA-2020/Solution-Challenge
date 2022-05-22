@@ -3,16 +3,20 @@ import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
+import 'package:reduce_footprint/Screens/login/login.dart';
 import 'package:reduce_footprint/Screens/pages/blogs_section.dart';
 import 'package:reduce_footprint/Screens/pages/home_section.dart';
 import 'package:reduce_footprint/Screens/pages/maps_section.dart';
 import 'package:reduce_footprint/models/blogs_model.dart';
 import 'package:reduce_footprint/responsive/mobile_screen_layout.dart';
+import 'package:reduce_footprint/screens/about.dart';
+import 'package:reduce_footprint/screens/leaderboard.dart';
 import 'package:reduce_footprint/screens/profile_screen.dart';
 import 'package:reduce_footprint/screens/results_menu.dart';
 import 'package:reduce_footprint/utils/global_variable.dart';
 import 'package:reduce_footprint/utils/utils.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../resources/auth_methods.dart';
 import '../store.dart';
 
 var userData = {};
@@ -173,26 +177,74 @@ class _DrawerWidgetState extends State<DrawerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    const padding = EdgeInsets.symmetric(horizontal: 20);
     return Drawer(
       child: Material(
-        color: const Color(0xFFE34A6F).withOpacity(0.7),
+        color: const Color.fromARGB(255, 236, 226, 45).withOpacity(0.7),
         child: ListView(
           children: <Widget>[
-            buildHeader(
-              urlImage: userData['photoUrl'],
-              name: userData['username'],
-              email: FirebaseAuth.instance.currentUser!.email!,
-            ),
+            buildHeader(),
             Container(
-              padding: padding,
+              padding: const EdgeInsets.all(20),
               child: Column(
                 children: [
-                  const SizedBox(height: 5),
-                  const Divider(
-                    thickness: 1,
-                    color: Colors.white,
+                  Row(
+                    children: [
+                      CircleAvatar(
+                          radius: 30,
+                          backgroundImage: NetworkImage(
+                            userData['photoUrl'],
+                          )),
+                      const SizedBox(width: 20),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            userData['username'],
+                            style: const TextStyle(
+                                fontSize: 20,
+                                color: Colors.purple,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            FirebaseAuth.instance.currentUser!.email!,
+                            style: TextStyle(
+                                fontSize: 14, color: Colors.purple.shade300),
+                          ),
+                        ],
+                      ),
+                      const Spacer(),
+                    ],
                   ),
+                  const SizedBox(height: 5),
+                  const Divider(thickness: 1.1, color: Colors.black),
+                  buildMenuItem(
+                      text: 'Leaderboard',
+                      icon: Icons.leaderboard_outlined,
+                      onClicked: () {
+                        selectedItem(context, 2);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const LeaderBoard(),
+                          ),
+                        );
+                      }),
+                  const SizedBox(height: 16),
+                  buildMenuItem(
+                    text: 'Your Emission',
+                    icon: Icons.gas_meter_outlined,
+                    onClicked: () {
+                      selectedItem(context, 3);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const YourEmission(),
+                        ),
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 16),
                   buildMenuItem(
                     text: 'Clear responses',
                     icon: Icons.delete_outline,
@@ -211,39 +263,35 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                       selectedItem(context, 1);
                     },
                   ),
-                  const SizedBox(height: 16),
-                  buildMenuItem(
-                    text: 'Leaderboard',
-                    icon: Icons.leaderboard_outlined,
-                    onClicked: () => selectedItem(context, 2),
-                  ),
-                  const SizedBox(height: 16),
-                  buildMenuItem(
-                    text: 'Your Emission',
-                    icon: Icons.gas_meter_outlined,
-                    onClicked: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const YourEmission(),
-                        ),
-                      ).then((value) => selectedItem(context, 3));
-                      //selectedItem(context, 2);
-                    },
-                  ),
                   const SizedBox(height: 24),
-                  const Divider(color: Colors.white70),
+                  const Divider(thickness: 1.1, color: Colors.black),
                   const SizedBox(height: 24),
                   buildMenuItem(
                     text: 'About',
                     icon: Icons.help_center_outlined,
-                    onClicked: () => selectedItem(context, 4),
+                    onClicked: () {
+                      selectedItem(context, 3);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const About(),
+                        ),
+                      );
+                    },
                   ),
                   const SizedBox(height: 16),
                   buildMenuItem(
                     text: 'SignOut',
                     icon: Icons.exit_to_app_outlined,
-                    onClicked: () => selectedItem(context, 5),
+                    onClicked: () async {
+                      FirebaseAuth.instance.signOut();
+                      await AuthMethods().signOut();
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (context) => const LogScreen(),
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),
@@ -254,37 +302,18 @@ class _DrawerWidgetState extends State<DrawerWidget> {
     );
   }
 
-  Widget buildHeader({
-    required String urlImage,
-    required String name,
-    required String email,
-  }) =>
-      InkWell(
+  Widget buildHeader() => InkWell(
         onTap: () {},
         child: Container(
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/images/decarbonus-banner.png'),
+              fit: BoxFit.cover,
+            ),
+          ),
           padding: const EdgeInsets.symmetric(horizontal: 20)
               .add(const EdgeInsets.symmetric(vertical: 40)),
-          child: Row(
-            children: [
-              CircleAvatar(radius: 30, backgroundImage: NetworkImage(urlImage)),
-              const SizedBox(width: 20),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    name,
-                    style: const TextStyle(fontSize: 20, color: Colors.white),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    email,
-                    style: const TextStyle(fontSize: 14, color: Colors.white),
-                  ),
-                ],
-              ),
-              const Spacer(),
-            ],
-          ),
+          child: const SizedBox(height: 30),
         ),
       );
 
@@ -293,12 +322,12 @@ class _DrawerWidgetState extends State<DrawerWidget> {
     required IconData icon,
     VoidCallback? onClicked,
   }) {
-    const color = Colors.white;
+    const color = Colors.blueGrey;
     const hoverColor = Colors.white70;
 
     return ListTile(
-      leading: Icon(icon, color: color),
-      title: Text(text, style: const TextStyle(color: color)),
+      leading: Icon(icon, color: color, size: 30),
+      title: Text(text, style: const TextStyle(color: color, fontSize: 18)),
       hoverColor: hoverColor,
       onTap: onClicked,
     );

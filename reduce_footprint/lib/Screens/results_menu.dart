@@ -1,10 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:reduce_footprint/screens/dashboard.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-import '../utils/colors.dart';
 import '../utils/global_variable.dart';
-
 class YourEmission extends StatelessWidget {
   const YourEmission({Key? key}) : super(key: key);
   @override
@@ -112,18 +108,6 @@ class MyHomePageState extends State<MyHomePage> {
                       ),
                     )
                   ],
-                ),
-                floatingActionButtonLocation:
-                    FloatingActionButtonLocation.centerDocked,
-                floatingActionButton: FloatingActionButton.extended(
-                  backgroundColor: kPrimaryColor,
-                  label: const Text('Start Off-setting ➔'),
-                  onPressed: () => Navigator.pushReplacement(
-                    context,
-                    CupertinoPageRoute(
-                      builder: (context) => const Dashboard(),
-                    ),
-                  ),
                 ),
               ),
             ),
