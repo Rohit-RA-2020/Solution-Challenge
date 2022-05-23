@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "660516972161",
+    "project_id": "solution-challenge-c08c4",
+    "storage_bucket": "solution-challenge-c08c4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:660516972161:android:5289bcae5988ece15c8f80",
+        "android_client_info": {
+          "package_name": "com.example.reduce_footprint"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "660516972161-9j47nef1r3lecdrj2v888asisbsrgsk0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.reduce_footprint",
+            "certificate_hash": "ed21e3879edc73549fb991b9b493b94dbf42bb4e"
+          }
+        },
+        {
+          "client_id": "660516972161-jgclgvaes4qejv9k12ejquvbatbiinn9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvFFnTv0pSOLByUXohL3T_fMQ-Aa9M7ME"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "660516972161-jgclgvaes4qejv9k12ejquvbatbiinn9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "660516972161-87084h0hgaktj6nce28i942qqch431s8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.reduceFootprint"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:660516972161:android:ee3973129ed872b25c8f80",
+        "android_client_info": {
+          "package_name": "com.rohitranjan.decarbonus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "660516972161-jgclgvaes4qejv9k12ejquvbatbiinn9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvFFnTv0pSOLByUXohL3T_fMQ-Aa9M7ME"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "660516972161-jgclgvaes4qejv9k12ejquvbatbiinn9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "660516972161-87084h0hgaktj6nce28i942qqch431s8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.reduceFootprint"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

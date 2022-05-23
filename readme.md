@@ -42,7 +42,7 @@ The contents in this repo follow the following structure, divided into two direc
 |   |───package-lock.json
 |   |───package.json
 |
-├───reduce_footprint (FLUTTER APP)
+├───decarbonus (FLUTTER APP)
    |-lib
      ├───screens
      ├───models
