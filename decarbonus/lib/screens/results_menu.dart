@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import '../utils/global_variable.dart';
+
 class YourEmission extends StatelessWidget {
   const YourEmission({Key? key}) : super(key: key);
   @override
@@ -29,18 +30,18 @@ class MyHomePage extends StatefulWidget {
 
 class MyHomePageState extends State<MyHomePage> {
   List<_CarbonData> data = [
-    _CarbonData('Your Emmission', results.data()['result']),
+    _CarbonData('Your Emmission', results['result']),
     _CarbonData('Global Traget', 2.0)
   ];
   final List<ChartData> chartData = [
-    ChartData('Travel', results.data()['travel']),
-    ChartData('Diet', results.data()['diet']),
-    ChartData('Car Travel', results.data()['carTravel']),
-    ChartData('Fuel', results.data()['fuel']),
-    ChartData('Shopping', results.data()['shopping']),
-    ChartData('Home Size', results.data()['homeSize']),
-    ChartData('Members', results.data()['homePeople']),
-    ChartData('Pet', results.data()['pet']),
+    ChartData('Travel', results['travel']),
+    ChartData('Diet', results['diet']),
+    ChartData('Car Travel', results['carTravel']),
+    ChartData('Fuel', results['fuel']),
+    ChartData('Shopping', results['shopping']),
+    ChartData('Home Size', results['homeSize']),
+    ChartData('Members', results['homePeople']),
+    ChartData('Pet', results['pet']),
   ];
   @override
   Widget build(BuildContext context) {

@@ -19,16 +19,12 @@ class GettingStarted extends StatefulWidget {
 }
 
 class _GettingStartedState extends State<GettingStarted> {
-  late CollectionReference _collectionReference;
   late String uid;
   var userData = {};
   bool isLoading = false;
 
   @override
   void initState() {
-    // email = widget.user.email;
-    _collectionReference = FirebaseFirestore.instance
-        .collection(FirebaseAuth.instance.currentUser!.email!);
     uid = FirebaseAuth.instance.currentUser!.uid;
     super.initState();
     getData();
@@ -116,10 +112,12 @@ class _GettingStartedState extends State<GettingStarted> {
                             style: TextStyle(fontSize: 18),
                           ),
                           onPressed: () async {
-                            var userDocRef =
-                                _collectionReference.doc('responses');
-                            var doc = await userDocRef.get();
-                            if (doc.exists) {
+                            var userSnap = await FirebaseFirestore.instance
+                                .collection('users')
+                                .doc(uid)
+                                .get();
+                            var response = userSnap['responses'];
+                            if (!response.isEmpty) {
                               Navigator.push(
                                 context,
                                 CupertinoPageRoute(

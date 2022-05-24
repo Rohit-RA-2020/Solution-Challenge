@@ -48,11 +48,13 @@ class _DashboardState extends State<Dashboard> {
   }
 
   void setResult() async {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    User currentUser = _auth.currentUser!;
     var userSnap = await FirebaseFirestore.instance
-        .collection(FirebaseAuth.instance.currentUser!.email!)
-        .doc('results')
+        .collection('users')
+        .doc(currentUser.uid)
         .get();
-    results = userSnap;
+    results = userSnap['result'];
   }
 
   getData() async {
@@ -160,13 +162,10 @@ class DrawerWidget extends StatefulWidget {
 }
 
 class _DrawerWidgetState extends State<DrawerWidget> {
-  late CollectionReference _collectionReference;
-  @override
-  void initState() {
-    _collectionReference = FirebaseFirestore.instance
-        .collection(FirebaseAuth.instance.currentUser!.email!);
-    super.initState();
-  }
+  final CollectionReference _collectionReference =
+      FirebaseFirestore.instance.collection('users');
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   final String _url =
       'https://docs.google.com/forms/d/e/1FAIpQLSfTrOXev2oIMr0Az1vVozF9MZQ-skkfW93xxAorywICMmye6g/viewform?usp=sf_link';
@@ -249,7 +248,13 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                     text: 'Clear responses',
                     icon: Icons.delete_outline,
                     onClicked: () async {
-                      await _collectionReference.doc('responses').delete();
+                      User currentUser = _auth.currentUser!;
+                      await _collectionReference.doc(currentUser.uid).set(
+                        {'responses': []},
+                        SetOptions(
+                          merge: true,
+                        ),
+                      );
                       selectedItem(context, 0);
                       Navigator.pop(context);
                     },

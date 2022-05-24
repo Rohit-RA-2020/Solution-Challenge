@@ -1,16 +1,12 @@
 // ignore_for_file: avoid_print
-
 import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:decarbonus/screens/result.dart';
 import 'package:lottie/lottie.dart';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import '../resources/questions_model.dart';
 import '../utils/colors.dart';
 import '../utils/global_variable.dart';
@@ -27,14 +23,10 @@ class _QuestionsState extends State<Questions> {
   late int? selectedOption = 100;
 
   var responses = <String, int>{};
-  late CollectionReference _collectionReference;
+  final CollectionReference _collectionReference =
+      FirebaseFirestore.instance.collection('users');
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  @override
-  void initState() {
-    _collectionReference = FirebaseFirestore.instance
-        .collection(FirebaseAuth.instance.currentUser!.email!);
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -90,14 +82,22 @@ class _QuestionsState extends State<Questions> {
               : FloatingActionButton.extended(
                   backgroundColor: kPrimaryColor,
                   onPressed: () async {
+                    User currentUser = _auth.currentUser!;
                     var dio = Dio();
                     results = await dio.post(
                         'https://api-account-345807.el.r.appspot.com/calculate',
                         data: responses);
                     Map<String, dynamic> result =
                         json.decode(results.toString());
-                    await _collectionReference.doc('responses').set(responses);
-                    await _collectionReference.doc('results').set(result);
+                    await _collectionReference
+                        .doc(currentUser.uid)
+                        .update({'responses': responses});
+                    await _collectionReference
+                        .doc(currentUser.uid)
+                        .update({'emmision': result['result']});
+                    await _collectionReference
+                        .doc(currentUser.uid)
+                        .update({'result': result});
                     Navigator.pushReplacement(
                       context,
                       CupertinoPageRoute(
