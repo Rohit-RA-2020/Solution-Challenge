@@ -8,7 +8,7 @@ class User {
   final String bio;
   final List followers;
   final List following;
-  final List responses;
+  final Map responses;
 
   const User(
       {required this.username,
@@ -18,7 +18,8 @@ class User {
       required this.bio,
       required this.followers,
       required this.following,
-      required this.responses});
+    required this.responses,
+  });
 
   static User fromSnap(DocumentSnapshot snap) {
     var snapshot = snap.data() as Map<String, dynamic>;

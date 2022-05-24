@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class LeaderBoard extends StatefulWidget {
@@ -11,7 +12,6 @@ class _LeaderBoardState extends State<LeaderBoard> {
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
-    final screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -34,62 +34,50 @@ class _LeaderBoardState extends State<LeaderBoard> {
                   Container(
                     margin: EdgeInsets.only(top: screenHeight / 8),
                     child: Column(
-                      children: [
-                        Container(
-                          child: const CircleAvatar(
-                            radius: 40,
-                            backgroundColor: Colors.greenAccent,
-                          ),
-                        ),
-                        Container(
-                          child: const Text(
-                            "2",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Column(
-                    children: [
-                      Container(
-                        child: const CircleAvatar(
+                      children: const [
+                        CircleAvatar(
                           radius: 40,
                           backgroundColor: Colors.greenAccent,
                         ),
-                      ),
-                      Container(
-                        child: const Text(
-                          "1",
+                        Text(
+                          "2",
                           style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
                               fontSize: 20),
                         ),
+                      ],
+                    ),
+                  ),
+                  Column(
+                    children: const [
+                      CircleAvatar(
+                        radius: 40,
+                        backgroundColor: Colors.greenAccent,
+                      ),
+                      Text(
+                        "1",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20),
                       ),
                     ],
                   ),
                   Container(
                     margin: EdgeInsets.only(top: screenHeight / 8),
                     child: Column(
-                      children: [
-                        Container(
-                          child: const CircleAvatar(
-                            radius: 40,
-                            backgroundColor: Colors.greenAccent,
-                          ),
+                      children: const [
+                        CircleAvatar(
+                          radius: 40,
+                          backgroundColor: Colors.greenAccent,
                         ),
-                        Container(
-                          child: const Text(
-                            "3",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20),
-                          ),
+                        Text(
+                          "3",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20),
                         ),
                       ],
                     ),
@@ -108,76 +96,101 @@ class _LeaderBoardState extends State<LeaderBoard> {
           ),
           Expanded(
             flex: 2,
-            child: ListView(
-              shrinkWrap: true,
-              children: [
-                Card(
-                  elevation: 0,
-                  margin: EdgeInsets.symmetric(horizontal: 8),
-                  child: ListTile(
-                    leading: Text("1"),
-                    trailing: Text("5001"),
-                    title: Row(
-                      children: const [
-                        CircleAvatar(
-                          radius: 20,
-                        ),
-                        SizedBox(
-                          width: 6,
-                        ),
-                        Text('Yash Satankar'),
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Card(
-                  elevation: 0,
-                  margin: EdgeInsets.symmetric(horizontal: 8),
-                  child: ListTile(
-                    leading: Text("2"),
-                    trailing: Text("4981"),
-                    title: Row(
-                      children: const [
-                        CircleAvatar(
-                          radius: 20,
-                        ),
-                        SizedBox(
-                          width: 6,
-                        ),
-                        Text('Yash Satankar'),
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Card(
-                  margin: EdgeInsets.symmetric(horizontal: 8),
-                  elevation: 0,
-                  child: ListTile(
-                    leading: Text("3"),
-                    trailing: Text("4501"),
-                    title: Row(
-                      children: const [
-                        CircleAvatar(
-                          radius: 20,
-                        ),
-                        SizedBox(
-                          width: 6,
-                        ),
-                        Text('Yash Satankar'),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
+            child: FutureBuilder(
+              future: FirebaseFirestore.instance
+                  .collection('users')
+                  .orderBy('emmision')
+                  .get(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+                return ListView.builder(
+                  itemCount: (snapshot.data! as dynamic).docs.length,
+                  itemBuilder: (context, index) {
+                    if (index == 0) {
+                      // return the header
+                      return const LeaderBoardItems(
+                        no: '',
+                        name: 'Name',
+                        emmision: 'Co2 / tons',
+                        img: '',
+                        isHeader: true,
+                      );
+                    }
+                    index -= 1;
+                    return LeaderBoardItems(
+                      isHeader: false,
+                      no: (index + 1).toString() + '.',
+                      name: (snapshot.data! as dynamic).docs[index]['username'],
+                      emmision: (snapshot.data! as dynamic)
+                          .docs[index]['emmision']
+                          .toString(),
+                      img: (snapshot.data! as dynamic).docs[index]['photoUrl'],
+                    );
+                  },
+                );
+              },
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class LeaderBoardItems extends StatelessWidget {
+  const LeaderBoardItems({
+    required this.no,
+    required this.name,
+    required this.emmision,
+    required this.img,
+    required this.isHeader,
+    Key? key,
+  }) : super(key: key);
+
+  final String no;
+  final String img;
+  final String name;
+  final String emmision;
+  final bool isHeader;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      leading: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 5.0, right: 10),
+            child: Text(
+              no,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
+          img != ''
+              ? CircleAvatar(
+                  backgroundImage: NetworkImage(
+                    img,
+                  ),
+                  radius: 16,
+                )
+              : Container(),
+        ],
+      ),
+      title: Text(
+        name,
+        style: isHeader
+            ? const TextStyle(fontWeight: FontWeight.bold, fontSize: 20)
+            : null,
+      ),
+      trailing: Text(
+        emmision,
+        style: isHeader
+            ? const TextStyle(fontWeight: FontWeight.bold, fontSize: 20)
+            : null,
       ),
     );
   }

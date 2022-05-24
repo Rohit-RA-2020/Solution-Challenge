@@ -50,7 +50,7 @@ class AuthMethods {
           bio: bio,
           followers: [],
           following: [],
-          responses: [],
+          responses: {},
         );
 
         // adding user in our database
