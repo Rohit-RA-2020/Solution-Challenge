@@ -23,18 +23,18 @@ class MyHomePage extends StatefulWidget {
 
 class MyHomePageState extends State<MyHomePage> {
   List<_CarbonData> data = [
-    _CarbonData('Your Emmission', results.data['result']),
+    _CarbonData('Your Emmission', results.data['result'].toDouble()),
     _CarbonData('Global Traget', 2.0)
   ];
   final List<ChartData> chartData = [
-    ChartData('Travel', results.data['travel']),
-    ChartData('Diet', results.data['diet']),
-    ChartData('Car Travel', results.data['carTravel']),
-    ChartData('Fuel', results.data['fuel']),
-    ChartData('Shopping', results.data['shopping']),
-    ChartData('Home Size', results.data['homeSize']),
-    ChartData('Members', results.data['homePeople']),
-    ChartData('Pet', results.data['pet']),
+    ChartData('Travel', results.data['travel'].toDouble()),
+    ChartData('Diet', results.data['diet'].toDouble()),
+    ChartData('Car Travel', results.data['carTravel'].toDouble()),
+    ChartData('Fuel', results.data['fuel'].toDouble()),
+    ChartData('Shopping', results.data['shopping'].toDouble()),
+    ChartData('Home Size', results.data['homeSize'].toDouble()),
+    ChartData('Members', results.data['homePeople'].toDouble()),
+    ChartData('Pet', results.data['pet'].toDouble()),
   ];
   @override
   Widget build(BuildContext context) {
