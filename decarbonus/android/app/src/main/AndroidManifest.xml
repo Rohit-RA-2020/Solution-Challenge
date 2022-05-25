@@ -31,7 +31,11 @@
             android:name="flutterEmbedding"
             android:value="2" />
     <meta-data android:name="com.google.android.geo.API_KEY"
-               android:value="APIKEY_HERE"/>
+               android:value="AIzaSyCw4bIhohGzd2vulKDBeUlGqOp9b8WSK1E"/>
+               <service
+            android:name="com.dexterous.flutterlocalnotifications.ForegroundService"        
+            android:exported="false"
+            android:stopWithTask="false"/>
     </application>
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
