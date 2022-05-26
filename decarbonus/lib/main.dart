@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:lottie/lottie.dart';
 import 'package:decarbonus/Screens/onBoarding/onboarding_screen.dart';
 import 'package:decarbonus/providers/user_provider.dart';
 import 'package:decarbonus/responsive/responsive_layout.dart';
@@ -70,30 +69,10 @@ class IntroPage extends StatefulWidget {
 }
 
 class _IntroPageState extends State<IntroPage> with TickerProviderStateMixin {
-  late AnimationController _lottieAnimation;
-  var expanded = false;
-  final double _bigFontSize = 178;
   final transitionDuration = const Duration(seconds: 1);
 
   @override
   void initState() {
-    _lottieAnimation = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 1),
-    );
-
-    Future.delayed(const Duration(seconds: 1))
-        .then((value) => setState(() => expanded = true))
-        .then((value) => const Duration(seconds: 1))
-        .then(
-          (value) => Future.delayed(const Duration(seconds: 1)).then(
-            (value) => _lottieAnimation.forward().then(
-                  (value) => Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(builder: (context) => const MyApp()),
-                      (route) => false),
-                ),
-          ),
-        );
     super.initState();
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       RemoteNotification? notification = message.notification;
@@ -122,85 +101,26 @@ class _IntroPageState extends State<IntroPage> with TickerProviderStateMixin {
       AndroidNotification? android = message.notification?.android;
       if (notification != null && android != null) {
         showDialog(
-            context: context,
-            builder: (_) {
-              return AlertDialog(
-                title: Text(notification.title!),
-                content: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [Text(notification.body!)],
-                  ),
+          context: context,
+          builder: (_) {
+            return AlertDialog(
+              title: Text(notification.title!),
+              content: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [Text(notification.body!)],
                 ),
-              );
-            });
+              ),
+            );
+          },
+        );
       }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: Container(
-        color: const Color(0xFF9ae79a),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            AnimatedDefaultTextStyle(
-              duration: transitionDuration,
-              curve: Curves.fastOutSlowIn,
-              style: TextStyle(
-                color: const Color(0xFF4e954e),
-                fontSize: !expanded ? _bigFontSize : 35,
-                fontFamily: 'Montserrat',
-                fontWeight: FontWeight.w600,
-              ),
-              child: const Text("D"),
-            ),
-            AnimatedCrossFade(
-              firstCurve: Curves.fastOutSlowIn,
-              crossFadeState: !expanded
-                  ? CrossFadeState.showFirst
-                  : CrossFadeState.showSecond,
-              duration: transitionDuration,
-              firstChild: Container(),
-              secondChild: _logoRemainder(),
-              alignment: Alignment.centerLeft,
-              sizeCurve: Curves.easeInOut,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _logoRemainder() {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        const Text(
-          "ECARBONUS",
-          style: TextStyle(
-            color: Color(0xFF4e954e),
-            fontSize: 35,
-            fontFamily: 'Montserrat',
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        LottieBuilder.asset(
-          'assets/lottie/splash.json',
-          onLoaded: (composition) {
-            _lottieAnimation..duration = composition.duration;
-          },
-          frameRate: FrameRate.max,
-          repeat: false,
-          animate: false,
-          height: 90,
-          width: 90,
-          controller: _lottieAnimation,
-        )
-      ],
-    );
+    return const MyApp();
   }
 }
 
