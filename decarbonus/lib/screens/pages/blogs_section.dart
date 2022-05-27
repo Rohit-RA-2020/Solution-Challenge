@@ -18,7 +18,7 @@ class Blogs extends StatefulWidget {
 
 class _BlogsState extends State<Blogs> {
   void _launchURL(String _url) async {
-    if (!await launch(_url)) throw 'Could not launch $_url';
+    if (!await launchUrl(Uri.parse(_url))) throw 'Could not launch $_url';
   }
 
   @override

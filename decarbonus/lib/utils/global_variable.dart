@@ -4,7 +4,7 @@ import 'package:decarbonus/screens/feed_screen.dart';
 import 'package:decarbonus/screens/search_screen.dart';
 
 const webScreenSize = 600;
-var results;
+dynamic results;
 String? nameStarted = '';
 
 List<Widget> homeScreenItems = [

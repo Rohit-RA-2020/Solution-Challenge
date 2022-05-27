@@ -8,7 +8,7 @@ import 'package:decarbonus/widgets/comment_card.dart';
 import 'package:provider/provider.dart';
 
 class CommentsScreen extends StatefulWidget {
-  final postId;
+  final dynamic postId;
   const CommentsScreen({Key? key, required this.postId}) : super(key: key);
 
   @override

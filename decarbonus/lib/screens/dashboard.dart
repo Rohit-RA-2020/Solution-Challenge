@@ -171,7 +171,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
       'https://docs.google.com/forms/d/e/1FAIpQLSfTrOXev2oIMr0Az1vVozF9MZQ-skkfW93xxAorywICMmye6g/viewform?usp=sf_link';
 
   void _launchURL() async {
-    if (!await launch(_url)) throw 'Could not launch $_url';
+    if (!await launchUrl(Uri.parse(_url))) throw 'Could not launch $_url';
   }
 
   @override

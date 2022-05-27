@@ -29,7 +29,6 @@ class _RegisterFormState extends State<RegisterForm> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _bioController = TextEditingController();
-  bool _isLoading = false;
   Uint8List? _image;
 
   @override
@@ -49,7 +48,7 @@ class _RegisterFormState extends State<RegisterForm> {
 
     // set loading to true
     setState(() {
-      _isLoading = true;
+      
     });
     String res = await AuthMethods().signUpUser(
         email: _emailController.text,
@@ -59,7 +58,7 @@ class _RegisterFormState extends State<RegisterForm> {
         file: _image!);
     if (res == 'sucess') {
       setState(() {
-        _isLoading = false;
+       
         showSnackBar(context, 'User created successfully');
       });
     } else {

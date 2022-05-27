@@ -82,8 +82,8 @@ class About extends StatelessWidget {
             ),
             IconButton(
                 onPressed: () {
-                  launch(
-                      'https://github.com/Rohit-RA-2020/Solution-Challenge/');
+                  launchUrl(Uri.parse(
+                      'https://github.com/Rohit-RA-2020/Solution-Challenge/'));
                 },
                 icon: const Icon(FontAwesomeIcons.github, size: 30)),
           ],
