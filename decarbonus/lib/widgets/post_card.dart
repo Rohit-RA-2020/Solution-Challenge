@@ -237,7 +237,41 @@ class _PostCardState extends State<PostCard> {
                   child: Align(
                 alignment: Alignment.bottomRight,
                 child: IconButton(
-                    icon: const Icon(Icons.bookmark_border), onPressed: () {}),
+                  icon: const Icon(Icons.more_vert),
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        title: const Text('Found something wrong'),
+                        content: const Text(
+                            'Do you want to report this post or user?'),
+                        actions: [
+                          TextButton(
+                            child: const Text(
+                              'Report',
+                              style: TextStyle(color: Colors.red),
+                            ),
+                            onPressed: () {
+                              FireStoreMethods().reportUser(
+                                widget.snap['username'].toString(),
+                                widget.snap['uid'].toString(),
+                                widget.snap['postId'].toString(),
+                              );
+                              Navigator.of(context).pop();
+                              showSnackBar(context, 'Post reported');
+                            },
+                          ),
+                          TextButton(
+                            child: const Text('Cancel'),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
               ))
             ],
           ),
