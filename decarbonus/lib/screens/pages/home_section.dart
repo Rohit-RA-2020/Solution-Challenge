@@ -1,3 +1,4 @@
+import 'package:decarbonus/screens/weeklyActivities.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:percent_indicator/percent_indicator.dart';
@@ -46,9 +47,19 @@ class Home extends StatelessWidget {
                     color: Color(0xFF6B6E70),
                   ),
                 ),
-                trailing: const Icon(
-                  Icons.more_horiz,
-                  color: Color(0xFF6B6E70),
+                trailing: IconButton(
+                  icon: const Icon(
+                    Icons.more_horiz,
+                    color: Color(0xFF6B6E70),
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => WeeklyActivities(),
+                      ),
+                    );
+                  },
                 ),
               ),
             ),
