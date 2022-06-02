@@ -88,7 +88,7 @@ class _GettingStartedState extends State<GettingStarted> {
                         child: Center(
                           child: Text(
                             'Welcome, ' + name,
-                            style: GoogleFonts.kalam(fontSize: 22),
+                            style: GoogleFonts.roboto(fontSize: 22),
                             textAlign: TextAlign.center,
                           ),
                         ),
@@ -97,7 +97,7 @@ class _GettingStartedState extends State<GettingStarted> {
                         child: Center(
                           child: Text(
                             'Before we continue, Please answer some questions',
-                            style: GoogleFonts.kalam(fontSize: 20),
+                            style: GoogleFonts.roboto(fontSize: 20),
                             textAlign: TextAlign.center,
                           ),
                         ),

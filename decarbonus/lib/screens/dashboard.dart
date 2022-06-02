@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:decarbonus/constants.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -178,7 +179,6 @@ class _DrawerWidgetState extends State<DrawerWidget> {
   Widget build(BuildContext context) {
     return Drawer(
       child: Material(
-        color: const Color.fromARGB(255, 236, 226, 45).withOpacity(0.7),
         child: ListView(
           children: <Widget>[
             buildHeader(),
@@ -189,10 +189,11 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                   Row(
                     children: [
                       CircleAvatar(
-                          radius: 30,
-                          backgroundImage: NetworkImage(
-                            userData['photoUrl'],
-                          )),
+                        radius: 30,
+                        backgroundImage: NetworkImage(
+                          userData['photoUrl'],
+                        ),
+                      ),
                       const SizedBox(width: 20),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -201,14 +202,16 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                             userData['username'],
                             style: const TextStyle(
                                 fontSize: 20,
-                                color: Colors.purple,
+                                color: kPrimaryColor,
                                 fontWeight: FontWeight.bold),
                           ),
                           const SizedBox(height: 4),
                           Text(
                             FirebaseAuth.instance.currentUser!.email!,
                             style: TextStyle(
-                                fontSize: 14, color: Colors.purple.shade300),
+                              fontSize: 14,
+                              color: kPrimaryColor.withOpacity(0.8),
+                            ),
                           ),
                         ],
                       ),
@@ -327,12 +330,12 @@ class _DrawerWidgetState extends State<DrawerWidget> {
     required IconData icon,
     VoidCallback? onClicked,
   }) {
-    const color = Colors.blueGrey;
+    Color color = Colors.green.shade900;
     const hoverColor = Colors.white70;
 
     return ListTile(
       leading: Icon(icon, color: color, size: 30),
-      title: Text(text, style: const TextStyle(color: color, fontSize: 18)),
+      title: Text(text, style: TextStyle(color: color, fontSize: 18)),
       hoverColor: hoverColor,
       onTap: onClicked,
     );

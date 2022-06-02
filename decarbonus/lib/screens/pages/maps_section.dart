@@ -16,6 +16,34 @@ class _MapsState extends State<Maps> {
   Location currentLocation = Location();
   final Set<Marker> _markers = {};
 
+  void addMarkers() {
+    _markers.add(Marker(
+        draggable: true,
+        icon: BitmapDescriptor.defaultMarkerWithHue(300),
+        flat: true,
+        markerId: const MarkerId('Venue'),
+        infoWindow: const InfoWindow(
+            title: 'Seminar', snippet: "Global Warming Discussion"),
+        position: const LatLng(21.1616, 79.0150)));
+    _markers.add(Marker(
+        draggable: true,
+        icon: BitmapDescriptor.defaultMarkerWithHue(180),
+        flat: true,
+        infoWindow: const InfoWindow(
+            title: 'Lake Cleaning', snippet: "Gorewada Lake Cleaning"),
+        markerId: const MarkerId('Venue1'),
+        position: const LatLng(21.2, 79.0150)));
+
+    _markers.add(Marker(
+        draggable: true,
+        icon: BitmapDescriptor.defaultMarkerWithHue(180),
+        flat: true,
+        infoWindow:
+            const InfoWindow(title: 'Tree Plantation', snippet: "Nagpur City"),
+        markerId: const MarkerId('Venue2'),
+        position: const LatLng(21.161, 79.1050)));
+  }
+
   void getLocation() async {
     //var location = await currentLocation.getLocation();
     currentLocation.onLocationChanged.listen((LocationData loc) {
@@ -30,40 +58,16 @@ class _MapsState extends State<Maps> {
             infoWindow: const InfoWindow(title: 'Your Current Location'),
             markerId: const MarkerId('Home'),
             position: LatLng(loc.latitude ?? 0.0, loc.longitude ?? 0.0)));
-
-        _markers.add(Marker(
-            draggable: true,
-            icon: BitmapDescriptor.defaultMarkerWithHue(300),
-            flat: true,
-            markerId: const MarkerId('Venue'),
-            infoWindow: const InfoWindow(
-                title: 'Seminar', snippet: "Global Warming Discussion"),
-            position: const LatLng(21.1616, 79.0150)));
-        _markers.add(Marker(
-            draggable: true,
-            icon: BitmapDescriptor.defaultMarkerWithHue(180),
-            flat: true,
-            infoWindow: const InfoWindow(
-                title: 'Lake Cleaning', snippet: "Gorewada Lake Cleaning"),
-            markerId: const MarkerId('Venue1'),
-            position: const LatLng(21.2, 79.0150)));
       });
-      _markers.add(Marker(
-          draggable: true,
-          icon: BitmapDescriptor.defaultMarkerWithHue(180),
-          flat: true,
-          infoWindow: const InfoWindow(
-              title: 'Tree Plantation', snippet: "Nagpur City"),
-          markerId: const MarkerId('Venue2'),
-          position: const LatLng(21.161, 79.1050)));
     });
   }
 
   @override
   void initState() {
     super.initState();
+    getLocation();
     setState(() {
-      getLocation();
+      addMarkers();
     });
   }
 
