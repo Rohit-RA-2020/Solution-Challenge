@@ -1,4 +1,7 @@
+import 'dart:ui';
+
 import 'package:decarbonus/screens/weeklyActivities.dart';
+import 'package:decarbonus/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:percent_indicator/percent_indicator.dart';
@@ -22,8 +25,8 @@ class Home extends StatelessWidget {
               decoration: const BoxDecoration(
                 color: Color(0xFF86C232),
                 borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(20),
-                  bottomRight: Radius.circular(20),
+                  bottomLeft: Radius.circular(25),
+                  bottomRight: Radius.circular(25),
                 ),
               ),
               child: ListTile(
@@ -64,276 +67,136 @@ class Home extends StatelessWidget {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8),
-            child: CircularPercentIndicator(
-              radius: 120.0,
-              lineWidth: 13.0,
-              animation: true,
-              percent: 0.5,
-              center: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Text(
-                    "You're on track",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15.0,
-                      color: Color(0xFF6B6E70),
-                    ),
-                  ),
-                  Text(
-                    "to reduce emission by",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15.0,
-                      color: Color(0xFF6B6E70),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    "50%",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 45.0,
-                        color: Color(0xFF222629)),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    "this month",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15.0,
-                        color: Color(0xFF61892F)),
-                  ),
-                ],
+          SizedBox(
+            height: 10,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Text(
+                'Your Total Emission',
+                style: TextStyle(
+                    color: Colors.black54,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold),
               ),
-              circularStrokeCap: CircularStrokeCap.round,
-              progressColor: const Color(0xFF86C232),
-              addAutomaticKeepAlive: true,
-              animationDuration: 2,
-            ),
-          ),
-          const SizedBox(
-            height: 40,
-            child: Divider(
-              color: Color(0xFF6B6E70),
-              thickness: 3,
-              endIndent: 100,
-              indent: 100,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [
-                  Container(
-                    margin: const EdgeInsets.all(10),
-                    child: Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.cloud_circle_rounded,
-                            size: 60,
-                            color: Colors.green.shade100,
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          const Text(
-                            'Total Emission',
-                            style: TextStyle(
-                                color: Colors.white70,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              top: 8,
-                            ),
-                            child: LinearPercentIndicator(
-                              animation: true,
-                              lineHeight: 18.0,
-                              animationDuration: 2000,
-                              percent: 0.4,
-                              progressColor: const Color(0xFF86C232),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          const Text(
-                            '40%',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    height: 210,
-                    width: 150,
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF6B6E70),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.all(15),
-                    child: Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.emoji_transportation,
-                            size: 60,
-                            color: Colors.green.shade100,
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          const Text(
-                            'Transport',
-                            style: TextStyle(
-                                color: Colors.white70,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              top: 8,
-                            ),
-                            child: LinearPercentIndicator(
-                              animation: true,
-                              lineHeight: 18.0,
-                              animationDuration: 2000,
-                              percent: 0.16,
-                              progressColor: const Color(0xFF86C232),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          const Text(
-                            '16%',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    height: 210,
-                    width: 150,
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF6B6E70),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.all(15),
-                    child: Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.food_bank,
-                            size: 60,
-                            color: Colors.green.shade100,
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          const Text(
-                            'Food',
-                            style: TextStyle(
-                                color: Colors.white70,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              top: 8,
-                            ),
-                            child: LinearPercentIndicator(
-                              animation: true,
-                              lineHeight: 18.0,
-                              animationDuration: 2000,
-                              percent: 0.70,
-                              progressColor: const Color(0xFF86C232),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          const Text(
-                            '70%',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    height: 210,
-                    width: 150,
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF6B6E70),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                ],
+              CircularPercentIndicator(
+                radius: 50,
+                animation: true,
+                animateFromLastPercent: true,
+                animationDuration: 2,
+                backgroundColor: Colors.white54,
+                center: Text('50%'),
+                percent: 0.50,
+                restartAnimation: true,
+                progressColor: Colors.green,
+                lineWidth: 8,
               ),
-            ),
+            ],
           ),
-          const SizedBox(
-            height: 20,
-            child: Divider(
-              color: Color(0xFF6B6E70),
-              thickness: 3,
-              endIndent: 100,
-              indent: 100,
-            ),
+          SizedBox(
+            height: 10,
           ),
           Container(
-            margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+            padding: EdgeInsets.all(10),
+            height: MediaQuery.of(context).size.height,
             decoration: BoxDecoration(
-                color: const Color(0xFF61892F),
-                borderRadius: BorderRadius.circular(10)),
-            child: TextButton(
-              onPressed: () {},
-              child: const Text(
-                'Record Emission  +',
-                style: TextStyle(color: Colors.white),
+              color: Colors.lightGreen,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(25),
+                topRight: Radius.circular(25),
               ),
             ),
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    InfoContainer(
+                      icon: Icons.emoji_transportation,
+                      percent: '25%',
+                      percentage: 0.25,
+                      string: 'Transport',
+                    ),
+                    InfoContainer(
+                        icon: Icons.food_bank_outlined,
+                        string: 'Food',
+                        percent: '5%',
+                        percentage: 0.05),
+                  ],
+                ),
+                Row(
+                  children: [
+                    InfoContainer(
+                      icon: Icons.emoji_transportation,
+                      percent: '25%',
+                      percentage: 0.25,
+                      string: 'Transport',
+                    ),
+                    InfoContainer(
+                        icon: Icons.food_bank_outlined,
+                        string: 'Food',
+                        percent: '5%',
+                        percentage: 0.05),
+                  ],
+                ),
+              ],
+            ),
           ),
-          const SizedBox(
-            height: 20,
-          )
         ],
+      ),
+    );
+  }
+}
+
+class InfoContainer extends StatelessWidget {
+  final IconData icon;
+  final String string;
+  final String percent;
+  final double percentage;
+  const InfoContainer({
+    Key? key,
+    required this.icon,
+    required this.string,
+    required this.percent,
+    required this.percentage,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(10),
+      margin: EdgeInsets.all(10),
+      height: MediaQuery.of(context).size.height / 4.5,
+      width: MediaQuery.of(context).size.width / 2.4,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Icon(
+            icon,
+            size: 50,
+            color: Colors.black54,
+          ),
+          Text(
+            string,
+            style: TextStyle(
+                color: Colors.black54,
+                fontSize: 20,
+                fontWeight: FontWeight.bold),
+          ),
+          LinearPercentIndicator(
+            width: 50,
+            animation: true,
+            animationDuration: 2,
+            percent: percentage,
+            leading: Text(percent),
+            lineHeight: 15,
+            alignment: MainAxisAlignment.center,
+          ),
+        ],
+      ),
+      decoration: BoxDecoration(
+        color: Colors.green,
+        borderRadius: BorderRadius.circular(20),
       ),
     );
   }
