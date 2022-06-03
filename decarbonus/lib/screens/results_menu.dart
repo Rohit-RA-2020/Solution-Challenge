@@ -30,7 +30,7 @@ class MyHomePage extends StatefulWidget {
 
 class MyHomePageState extends State<MyHomePage> {
   List<_CarbonData> data = [
-    _CarbonData('Your Emmission', results['result']),
+    _CarbonData('Your Emmission', results['result'].toDouble()),
     _CarbonData('Global Traget', 2.0)
   ];
   final List<ChartData> chartData = [
@@ -89,7 +89,8 @@ class MyHomePageState extends State<MyHomePage> {
                         padding: const EdgeInsets.all(8.0),
                         //Initialize the spark charts widget
                         child: SfCircularChart(
-                          legend: Legend(isVisible: true),
+                          legend: Legend(
+                              isVisible: true, position: LegendPosition.right),
                           series: <CircularSeries>[
                             // Render pie chart
                             PieSeries<ChartData, String>(

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import '../../store.dart';
 
 Color primaryColor = const Color(0xffFD6592);
-Color bgColor = const Color(0xffF9E0E3);
+Color bgColor = const Color(0xFF0D1321);
 Color secondaryColor = const Color(0xff324558);
 
 class Blogs extends StatefulWidget {
@@ -37,19 +36,22 @@ class _BlogsState extends State<Blogs> {
                 child: Stack(
                   children: <Widget>[
                     Container(
-                      width: 90,
-                      height: 90,
-                      color: bgColor,
-                    ),
-                    Container(
-                      color: Colors.white,
                       padding: const EdgeInsets.all(12.0),
                       margin: const EdgeInsets.all(12.0),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF0D1321),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(20)),
+                        border: Border.all(
+                          color: const Color.fromARGB(255, 255, 215, 217),
+                          width: 2,
+                        ),
+                      ),
                       child: Row(
                         children: <Widget>[
                           Container(
                             height: 100,
-                            color: Colors.transparent,
+                            color: const Color(0xFF0D1321),
                             width: 100.0,
                             child: Image.network(
                               blogPost[index].image,
@@ -62,8 +64,8 @@ class _BlogsState extends State<Blogs> {
                                 Text(
                                   blogPost[index].title,
                                   textAlign: TextAlign.justify,
-                                  style: TextStyle(
-                                    color: secondaryColor,
+                                  style: const TextStyle(
+                                    color: Colors.green,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 18.0,
                                   ),
@@ -72,19 +74,17 @@ class _BlogsState extends State<Blogs> {
                                 Text.rich(
                                   TextSpan(
                                     children: [
-                                      WidgetSpan(
-                                        child: CircleAvatar(
-                                          radius: 15.0,
-                                          backgroundColor: primaryColor,
-                                        ),
-                                      ),
                                       const WidgetSpan(
                                         child: SizedBox(width: 5.0, height: 5),
                                       ),
                                       TextSpan(
-                                          text: blogPost[index].author,
-                                          style:
-                                              const TextStyle(fontSize: 16.0)),
+                                        text: blogPost[index].author,
+                                        style: const TextStyle(
+                                            color: Color.fromARGB(
+                                                255, 230, 191, 252),
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 16.0),
+                                      ),
                                       const WidgetSpan(
                                         child: SizedBox(width: 20.0),
                                       ),
@@ -93,6 +93,8 @@ class _BlogsState extends State<Blogs> {
                                       ),
                                       TextSpan(
                                         text: blogPost[index].desc,
+                                        style: const TextStyle(
+                                            color: Color(0xFFD3DCDE)),
                                       ),
                                     ],
                                   ),

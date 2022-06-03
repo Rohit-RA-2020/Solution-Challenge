@@ -1,8 +1,10 @@
-import 'package:decarbonus/constants.dart';
 import 'package:decarbonus/screens/activity_list.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import '../store.dart';
 import '../utils/global_variable.dart';
+
+String actname = '';
 
 class WeeklyActivities extends StatefulWidget {
   const WeeklyActivities({
@@ -19,6 +21,7 @@ class WeeklyActivities extends StatefulWidget {
 class _WeeklyActivitiesState extends State<WeeklyActivities> {
   @override
   Widget build(BuildContext context) {
+    actname = widget.activityName;
     String aname =
         widget.activityName[0].toUpperCase() + widget.activityName.substring(1);
     String emission = widget.activityName == 'food'
@@ -136,13 +139,13 @@ class WeekWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 8.0, right: 8.0, bottom: 10.0),
+      padding: const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 10.0),
       child: InkWell(
         onTap: () {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const ActivityList(),
+              builder: (context) => ActivityList(activityName: actname),
             ),
           );
         },

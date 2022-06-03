@@ -96,7 +96,7 @@ class _GettingStartedState extends State<GettingStarted> {
                       SizedBox(
                         child: Center(
                           child: Text(
-                            'Before we continue, Please answer some questions',
+                            'Answer some questions to know your carbon footprint',
                             style: GoogleFonts.roboto(fontSize: 20),
                             textAlign: TextAlign.center,
                           ),

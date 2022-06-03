@@ -110,22 +110,19 @@ class _DashboardState extends State<Dashboard> {
       drawer: const SafeArea(
         child: DrawerWidget(),
       ),
-      backgroundColor: const Color(0xFFfffcf5),
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        iconTheme: const IconThemeData(color: Colors.green),
-        elevation: 0,
-        title: Text(
-          appTitle[_bottomNavIndex],
-          style: const TextStyle(color: Colors.black, fontSize: 19),
-        ),
-        backgroundColor: Colors.transparent,
-      ),
-      body: Center(
-        child: _widgetOptions.elementAt(_bottomNavIndex),
-      ),
+          iconTheme: const IconThemeData(color: Colors.green),
+          elevation: 0,
+          title: Text(
+            appTitle[_bottomNavIndex],
+            style: const TextStyle(color: Colors.black, fontSize: 19),
+          ),
+          backgroundColor: Colors.white),
+      body: Center(child: _widgetOptions.elementAt(_bottomNavIndex)),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.compost_outlined),
-        backgroundColor: Colors.black87,
+        backgroundColor: Colors.black,
         onPressed: () => Navigator.push(
           context,
           MaterialPageRoute(
@@ -136,13 +133,15 @@ class _DashboardState extends State<Dashboard> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: AnimatedBottomNavigationBar(
-        backgroundColor: Colors.black87,
+        backgroundColor: const Color(0xFF0D1321),
         icons: iconList,
+        iconSize: 25,
         splashColor: Colors.green,
         inactiveColor: Colors.white,
         activeColor: Colors.lightGreen,
         activeIndex: _bottomNavIndex,
         gapLocation: GapLocation.center,
+        notchSmoothness: NotchSmoothness.defaultEdge,
         onTap: (index) => setState(() => _bottomNavIndex = index),
         //other params
       ),
@@ -176,6 +175,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
   Widget build(BuildContext context) {
     return Drawer(
       child: Material(
+        color: const Color(0xFF0D1321),
         child: ListView(
           children: <Widget>[
             Container(
@@ -212,7 +212,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                       const Spacer(),
                     ],
                   ),
-                  const SizedBox(height: 5),
+                  const SizedBox(height: 30),
                   const Divider(thickness: 1.1, color: Colors.black),
                   buildMenuItem(
                       text: 'Leaderboard',
@@ -324,7 +324,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
     required IconData icon,
     VoidCallback? onClicked,
   }) {
-    Color color = Colors.green.shade900;
+    Color color = Colors.green.shade300;
     const hoverColor = Colors.white70;
 
     return ListTile(

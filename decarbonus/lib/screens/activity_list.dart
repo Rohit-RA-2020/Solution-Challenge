@@ -1,7 +1,10 @@
+import 'package:decarbonus/store.dart';
 import 'package:flutter/material.dart';
 
 class ActivityList extends StatefulWidget {
-  const ActivityList({Key? key}) : super(key: key);
+  const ActivityList({Key? key, required this.activityName}) : super(key: key);
+
+  final String activityName;
 
   @override
   _ActivityListState createState() => _ActivityListState();
@@ -10,6 +13,7 @@ class ActivityList extends StatefulWidget {
 class _ActivityListState extends State<ActivityList> {
   @override
   Widget build(BuildContext context) {
+    print(widget.activityName);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Day Wise Activities'),
@@ -18,61 +22,26 @@ class _ActivityListState extends State<ActivityList> {
         elevation: 0,
       ),
       body: ListView(
-        children: const [
-          DayWiseActivity(
-            day: 'Day 1',
-          ),
-          SizedBox(
-            height: 15,
-          ),
-          DayWiseActivity(
-            day: 'Day 2',
-          ),
-          SizedBox(
-            height: 15,
-          ),
-          DayWiseActivity(
-            day: 'Day 3',
-          ),
-          SizedBox(
-            height: 15,
-          ),
-          DayWiseActivity(
-            day: 'Day 4',
-          ),
-          SizedBox(
-            height: 15,
-          ),
-          DayWiseActivity(
-            day: 'Day 5',
-          ),
-          SizedBox(
-            height: 15,
-          ),
-          DayWiseActivity(
-            day: 'Day 6',
-          ),
-          SizedBox(
-            height: 15,
-          ),
-          DayWiseActivity(
-            day: 'Day 7',
-          ),
+        children: [
+          dayWiseActivity('Day 1', 1),
+          const SizedBox(height: 15),
+          dayWiseActivity('Day 2', 2),
+          const SizedBox(height: 15),
+          dayWiseActivity('Day 3', 3),
+          const SizedBox(height: 15),
+          dayWiseActivity('Day 4', 4),
+          const SizedBox(height: 15),
+          dayWiseActivity('Day 5', 5),
+          const SizedBox(height: 15),
+          dayWiseActivity('Day 6', 6),
+          const SizedBox(height: 15),
+          dayWiseActivity('Day 7', 7),
         ],
       ),
     );
   }
-}
 
-class DayWiseActivity extends StatelessWidget {
-  final String day;
-  const DayWiseActivity({
-    Key? key,
-    required this.day,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
+  Padding dayWiseActivity(String day, int index) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -99,11 +68,11 @@ class DayWiseActivity extends StatelessWidget {
         ),
         child: ExpansionTile(
           title: Text(day),
-          children: const <Widget>[
+          children: <Widget>[
             ListTile(
               title: Text(
-                'Description',
-                style: TextStyle(fontWeight: FontWeight.w700),
+                dayWise[widget.activityName]![index - 1],
+                style: const TextStyle(fontWeight: FontWeight.w700),
               ),
             )
           ],

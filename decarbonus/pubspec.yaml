@@ -58,6 +58,7 @@ dependencies:
   font_awesome_flutter: ^10.1.0
   firebase_messaging: ^11.4.0
   flutter_local_notifications: ^9.5.3+1
+  blurrycontainer: ^1.0.2
 
 dev_dependencies:
   flutter_test:

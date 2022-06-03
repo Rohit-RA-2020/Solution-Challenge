@@ -82,7 +82,8 @@ class MyHomePageState extends State<MyHomePage> {
                         padding: const EdgeInsets.all(8.0),
                         //Initialize the spark charts widget
                         child: SfCircularChart(
-                          legend: Legend(isVisible: true),
+                          legend: Legend(
+                              isVisible: true, position: LegendPosition.right),
                           series: <CircularSeries>[
                             // Render pie chart
                             PieSeries<ChartData, String>(
