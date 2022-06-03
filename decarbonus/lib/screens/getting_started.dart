@@ -1,3 +1,4 @@
+import 'package:decarbonus/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +8,6 @@ import 'package:decarbonus/screens/dashboard.dart';
 import 'package:decarbonus/screens/questions.dart';
 import 'package:lottie/lottie.dart';
 import 'package:decarbonus/utils/global_variable.dart';
-
 import '../utils/utils.dart';
 
 class GettingStarted extends StatefulWidget {
@@ -102,7 +102,8 @@ class _GettingStartedState extends State<GettingStarted> {
                           ),
                         ),
                       ),
-                      Lottie.asset('assets/lottie/loading.json'),
+                      Lottie.network(
+                          'https://assets7.lottiefiles.com/private_files/lf30_s5cmdqot.json'),
                       SizedBox(
                         height: 70,
                         width: 200,
@@ -136,7 +137,7 @@ class _GettingStartedState extends State<GettingStarted> {
                           style: ButtonStyle(
                             elevation: MaterialStateProperty.all<double>(10.0),
                             backgroundColor:
-                                MaterialStateProperty.all(Colors.green),
+                                MaterialStateProperty.all(kPrimaryColor),
                             shape: MaterialStateProperty.all<
                                 RoundedRectangleBorder>(
                               RoundedRectangleBorder(

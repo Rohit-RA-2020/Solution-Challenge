@@ -125,7 +125,7 @@ class _DashboardState extends State<Dashboard> {
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.compost_outlined),
-        backgroundColor: Colors.pink,
+        backgroundColor: Colors.black87,
         onPressed: () => Navigator.push(
           context,
           MaterialPageRoute(
@@ -143,9 +143,6 @@ class _DashboardState extends State<Dashboard> {
         activeColor: Colors.lightGreen,
         activeIndex: _bottomNavIndex,
         gapLocation: GapLocation.center,
-        notchSmoothness: NotchSmoothness.verySmoothEdge,
-        leftCornerRadius: 32,
-        rightCornerRadius: 32,
         onTap: (index) => setState(() => _bottomNavIndex = index),
         //other params
       ),
@@ -181,7 +178,6 @@ class _DrawerWidgetState extends State<DrawerWidget> {
       child: Material(
         child: ListView(
           children: <Widget>[
-            buildHeader(),
             Container(
               padding: const EdgeInsets.all(20),
               child: Column(
@@ -208,10 +204,8 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                           const SizedBox(height: 4),
                           Text(
                             FirebaseAuth.instance.currentUser!.email!,
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: kPrimaryColor.withOpacity(0.8),
-                            ),
+                            style: const TextStyle(
+                                fontSize: 14, color: kPrimaryColor),
                           ),
                         ],
                       ),

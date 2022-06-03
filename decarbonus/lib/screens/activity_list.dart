@@ -12,89 +12,51 @@ class _ActivityListState extends State<ActivityList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Day Wise Activities'),
+        title: const Text('Day Wise Activities'),
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
-      ),
-      bottomNavigationBar: BottomAppBar(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              Expanded(
-                child: Container(
-                  margin: EdgeInsets.all(4),
-                  decoration: BoxDecoration(color: Colors.redAccent),
-                  child: TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      'huehue',
-                      style: TextStyle(color: Colors.white, fontSize: 15),
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Container(
-                  margin: EdgeInsets.all(4),
-                  decoration: BoxDecoration(
-                    color: Colors.green,
-                  ),
-                  child: TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      'Completed',
-                      style: TextStyle(color: Colors.white, fontSize: 15),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
+        elevation: 0,
       ),
       body: ListView(
-        children: [
+        children: const [
           DayWiseActivity(
-            day: 'Day1',
+            day: 'Day 1',
           ),
           SizedBox(
             height: 15,
           ),
           DayWiseActivity(
-            day: 'Day2',
+            day: 'Day 2',
           ),
           SizedBox(
             height: 15,
           ),
           DayWiseActivity(
-            day: 'Day3',
+            day: 'Day 3',
           ),
           SizedBox(
             height: 15,
           ),
           DayWiseActivity(
-            day: 'Day4',
+            day: 'Day 4',
           ),
           SizedBox(
             height: 15,
           ),
           DayWiseActivity(
-            day: 'Day5',
+            day: 'Day 5',
           ),
           SizedBox(
             height: 15,
           ),
           DayWiseActivity(
-            day: 'Day6',
+            day: 'Day 6',
           ),
           SizedBox(
             height: 15,
           ),
           DayWiseActivity(
-            day: 'Day7',
+            day: 'Day 7',
           ),
         ],
       ),
@@ -111,16 +73,16 @@ class DayWiseActivity extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-      onPressed: () {},
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
       child: Container(
-        padding: EdgeInsets.only(left: 15),
+        padding: const EdgeInsets.only(left: 15),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          boxShadow: [
+          boxShadow: const [
             BoxShadow(
               color: Colors.grey,
-              offset: const Offset(
+              offset: Offset(
                 5.0,
                 5.0,
               ),
@@ -129,15 +91,22 @@ class DayWiseActivity extends StatelessWidget {
             ), //BoxShadow
             BoxShadow(
               color: Colors.white,
-              offset: const Offset(0.0, 0.0),
+              offset: Offset(0.0, 0.0),
               blurRadius: 0.0,
               spreadRadius: 0.0,
             ), //BoxShadow
           ],
         ),
-        child: ListTile(
+        child: ExpansionTile(
           title: Text(day),
-          trailing: Icon(Icons.circle_outlined),
+          children: const <Widget>[
+            ListTile(
+              title: Text(
+                'Description',
+                style: TextStyle(fontWeight: FontWeight.w700),
+              ),
+            )
+          ],
         ),
       ),
     );

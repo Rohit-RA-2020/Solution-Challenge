@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_print
 import 'dart:convert';
+import 'dart:ui';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -27,7 +28,6 @@ class _QuestionsState extends State<Questions> {
       FirebaseFirestore.instance.collection('users');
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,6 +54,7 @@ class _QuestionsState extends State<Questions> {
         children: [
           questionIndex != 0
               ? FloatingActionButton.extended(
+                  backgroundColor: Colors.white,
                   onPressed: () {
                     if (questionIndex > 0) {
                       setState(() {
@@ -62,12 +63,17 @@ class _QuestionsState extends State<Questions> {
                       });
                     }
                   },
-                  label: const Text('Previous'),
-                  icon: const Icon(Icons.arrow_back),
+                  shape: const StadiumBorder(
+                    side: BorderSide(color: Colors.black, width: 3),
+                  ),
+                  label: const Text('Previous',
+                      style: TextStyle(color: Colors.black)),
+                  icon: const Icon(Icons.arrow_back, color: Colors.black),
                 )
               : Container(),
           questionIndex != questionsList.length - 1
               ? FloatingActionButton.extended(
+                  backgroundColor: Colors.black,
                   onPressed: () {
                     if (questionIndex < questionsList.length - 1) {
                       setState(() {
@@ -80,7 +86,7 @@ class _QuestionsState extends State<Questions> {
                   icon: const Icon(Icons.arrow_forward),
                 )
               : FloatingActionButton.extended(
-                  backgroundColor: kPrimaryColor,
+                  backgroundColor: const Color(0xFF1DBF73),
                   onPressed: () async {
                     User currentUser = _auth.currentUser!;
                     var dio = Dio();
@@ -105,6 +111,8 @@ class _QuestionsState extends State<Questions> {
                       ),
                     );
                   },
+                  shape: const StadiumBorder(
+                      side: BorderSide(color: Colors.green, width: 3)),
                   label: const Text('Submit'),
                   icon: const Icon(Icons.check),
                 ),
@@ -146,10 +154,12 @@ class _QuestionsState extends State<Questions> {
                   itemBuilder: (context, index) => Container(
                     margin: const EdgeInsets.all(4),
                     decoration: BoxDecoration(
-                      color: selectedOption == index ? Colors.lightGreen : null,
+                      color: selectedOption == index
+                          ? const Color(0xFF1DBF73)
+                          : null,
                       borderRadius: BorderRadius.circular(15),
                       border: Border.all(
-                        color: kPrimaryColor,
+                        color: Colors.black,
                         width: 1,
                       ),
                     ),
