@@ -1,4 +1,5 @@
 import 'package:decarbonus/screens/activity_list.dart';
+import 'package:decarbonus/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import '../store.dart';
@@ -38,11 +39,11 @@ class _WeeklyActivitiesState extends State<WeeklyActivities> {
         children: [
           Lottie.asset(
             activityAvatar[widget.activityName]!,
-            height: 100,
-            width: 100,
+            height: 150,
+            width: 150,
           ),
           const SizedBox(
-            height: 15,
+            height: 5,
             child: Divider(
               color: Colors.black38,
               thickness: 3,
@@ -76,9 +77,27 @@ class _WeeklyActivitiesState extends State<WeeklyActivities> {
               ),
             ),
           ),
-          Lottie.network(
-              'https://assets2.lottiefiles.com/packages/lf20_lzhwcgzg.json',
-              fit: BoxFit.scaleDown),
+          const Text(
+            'Need help in reducing?',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Lottie.asset('assets/lottie/path.json', fit: BoxFit.scaleDown),
+          const Padding(
+            padding: EdgeInsets.only(
+                left: 15.0, right: 15.0, top: 10.0, bottom: 10.0),
+            child: Text(
+              'Here follow some of our curated tracks to help you reduce your carbon footprint',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
           const WeekWidget(
             week: 'Week 1',
             icon: Icon(null),
@@ -142,12 +161,16 @@ class WeekWidget extends StatelessWidget {
       padding: const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 10.0),
       child: InkWell(
         onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => ActivityList(activityName: actname),
-            ),
-          );
+          if (week != 'Week 1') {
+            showSnackBar(context, 'This week is currently locked');
+          } else {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ActivityList(activityName: actname),
+              ),
+            );
+          }
         },
         child: Container(
           padding: const EdgeInsets.only(left: 15),
@@ -173,7 +196,11 @@ class WeekWidget extends StatelessWidget {
             ],
           ),
           child: ListTile(
-            title: Text(week),
+            title: Text(
+              week,
+              style: const TextStyle(
+                  color: Color(0xFF0D1321), fontWeight: FontWeight.w500),
+            ),
             trailing: icon,
           ),
         ),

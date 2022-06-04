@@ -102,8 +102,7 @@ class _GettingStartedState extends State<GettingStarted> {
                           ),
                         ),
                       ),
-                      Lottie.network(
-                          'https://assets7.lottiefiles.com/private_files/lf30_s5cmdqot.json'),
+                      Lottie.asset('assets/lottie/loading.json'),
                       SizedBox(
                         height: 70,
                         width: 200,

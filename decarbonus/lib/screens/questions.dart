@@ -1,6 +1,5 @@
 // ignore_for_file: avoid_print
 import 'dart:convert';
-import 'dart:ui';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,7 +8,6 @@ import 'package:decarbonus/screens/result.dart';
 import 'package:lottie/lottie.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../resources/questions_model.dart';
-import '../utils/colors.dart';
 import '../utils/global_variable.dart';
 
 class Questions extends StatefulWidget {

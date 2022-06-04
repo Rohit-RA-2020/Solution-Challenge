@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import '../../store.dart';
 import '../../utils/global_variable.dart';
 import '../weekly_activities.dart';
 
@@ -15,7 +16,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  List<bool> isChecked = [false, false, false];
   @override
   Widget build(BuildContext context) {
     String cdate = DateFormat("dd MMMM, yyyy").format(DateTime.now());
