@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:decarbonus/screens/dashboard.dart';
@@ -36,6 +38,27 @@ class MyHomePageState extends State<MyHomePage> {
     ChartData('Members', results.data['homePeople'].toDouble()),
     ChartData('Pet', results.data['pet'].toDouble()),
   ];
+
+  @override
+  void initState() {
+    setResult();
+    super.initState();
+  }
+
+  void setResult() async {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    User currentUser = _auth.currentUser!;
+    var userSnap = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(currentUser.uid)
+        .get();
+    try {
+      results = userSnap['result'];
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(

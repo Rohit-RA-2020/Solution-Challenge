@@ -27,7 +27,23 @@ class _GettingStartedState extends State<GettingStarted> {
   void initState() {
     uid = FirebaseAuth.instance.currentUser!.uid;
     super.initState();
+
+    setResult();
     getData();
+  }
+
+  void setResult() async {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    User currentUser = _auth.currentUser!;
+    var userSnap = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(currentUser.uid)
+        .get();
+    try {
+      results = userSnap['result'];
+    } catch (e) {
+      print(e);
+    }
   }
 
   getData() async {
