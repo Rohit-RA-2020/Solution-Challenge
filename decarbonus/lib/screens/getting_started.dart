@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:decarbonus/constants.dart';
+import 'package:decarbonus/store.dart';
+import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -27,9 +31,24 @@ class _GettingStartedState extends State<GettingStarted> {
   void initState() {
     uid = FirebaseAuth.instance.currentUser!.uid;
     super.initState();
-
+    getTasks();
     setResult();
     getData();
+  }
+
+  void getTasks() async {
+    if (dailyTasks.isEmpty) {
+      var dio = Dio();
+      await dio
+          .get('https://ornate-time-325015.el.r.appspot.com/',
+              options: Options(responseType: ResponseType.plain, headers: {
+                'Content-Type': 'application/json;charset=UTF-8',
+                'Charset': 'utf-8'
+              }))
+          .then((response) {
+        dailyTasks = jsonDecode(response.data);
+      });
+    }
   }
 
   void setResult() async {

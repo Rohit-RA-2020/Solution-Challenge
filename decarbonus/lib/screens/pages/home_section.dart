@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:percent_indicator/percent_indicator.dart';
@@ -140,10 +141,8 @@ class _HomeState extends State<Home> {
                             color: Color(0xFF1D4C4F),
                           ),
                         ),
-                        todayTask('Travel with car pooling',
-                            const Icon(Icons.car_rental), 0),
-                        todayTask(
-                            'Eat Vegan Today', const Icon(Icons.food_bank), 1),
+                        todayTask(dailyTasks['1'], 0),
+                        todayTask(dailyTasks['2'], 1),
                         const SizedBox(height: 10),
                         const Text(
                           'Bonus task',
@@ -153,7 +152,7 @@ class _HomeState extends State<Home> {
                             color: Color(0xFF1D4C4F),
                           ),
                         ),
-                        todayTask('Plant a tree', const Icon(Icons.nature), 2),
+                        todayTask(dailyTasks['3'], 2),
                       ],
                     ),
                   ),
@@ -248,11 +247,11 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Padding todayTask(String name, Icon icon, int index) {
+  Padding todayTask(String name, int index) {
     return Padding(
       padding: const EdgeInsets.only(right: 8.0, left: 8.0),
       child: CheckboxListTile(
-        secondary: icon,
+        secondary: const Icon(FontAwesomeIcons.clipboardList),
         title: Text(
           name,
           style: const TextStyle(
