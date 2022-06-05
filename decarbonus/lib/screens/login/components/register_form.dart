@@ -40,29 +40,41 @@ class _RegisterFormState extends State<RegisterForm> {
   }
 
   void signUpUser() async {
-    if (_image == null) {
-      showSnackBar(context, 'Plese select an image');
+    if (_usernameController.text == '') {
+      showSnackBar(context, 'Enter user name');
       return;
     }
     nameStarted = _usernameController.text;
 
     // set loading to true
-    setState(() {
-      
-    });
-    String res = await AuthMethods().signUpUser(
+    if (_image == null) {
+      String res = await AuthMethods().signUpUser(
         email: _emailController.text,
         password: _passwordController.text,
         username: _usernameController.text,
         bio: _bioController.text,
-        file: _image!);
-    if (res == 'sucess') {
-      setState(() {
-       
-        showSnackBar(context, 'User created successfully');
-      });
+      );
+      if (res == 'sucess') {
+        setState(() {
+          showSnackBar(context, 'User created successfully');
+        });
+      } else {
+        showSnackBar(context, res);
+      }
     } else {
-      showSnackBar(context, res);
+      String res = await AuthMethods().signUpUserWithImage(
+          email: _emailController.text,
+          password: _passwordController.text,
+          username: _usernameController.text,
+          bio: _bioController.text,
+          file: _image!);
+      if (res == 'sucess') {
+        setState(() {
+          showSnackBar(context, 'User created successfully');
+        });
+      } else {
+        showSnackBar(context, res);
+      }
     }
   }
 
@@ -193,7 +205,10 @@ class _RegisterFormState extends State<RegisterForm> {
                   ),
                   const SizedBox(height: 10),
                   InkWell(
-                    onTap: signUpUser,
+                    onTap: () {
+                      signUpUser();
+                      setState(() {});
+                    },
                     borderRadius: BorderRadius.circular(30),
                     child: Container(
                       width: widget.size.width * 0.8,

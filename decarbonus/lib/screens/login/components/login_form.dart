@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:decarbonus/Screens/getting_started.dart';
 import 'package:decarbonus/responsive/responsive_layout.dart';
-import 'package:decarbonus/responsive/web_screen_layout.dart';
 import '../../../constants.dart';
 import '../../../resources/auth_methods.dart';
-import '../../../utils/utils.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({
@@ -50,7 +48,7 @@ class _LoginFormState extends State<LoginForm> {
           MaterialPageRoute(
             builder: (context) => const ResponsiveLayout(
               mobileScreenLayout: GettingStarted(),
-              webScreenLayout: WebScreenLayout(),
+              webScreenLayout: GettingStarted(),
             ),
           ),
           (route) => false);
@@ -62,7 +60,7 @@ class _LoginFormState extends State<LoginForm> {
       setState(() {
         _isLoading = false;
       });
-      showSnackBar(context, res);
+      //showSnackBar(context, res);
     }
   }
 

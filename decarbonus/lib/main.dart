@@ -6,7 +6,6 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:decarbonus/Screens/onBoarding/onboarding_screen.dart';
 import 'package:decarbonus/providers/user_provider.dart';
 import 'package:decarbonus/responsive/responsive_layout.dart';
-import 'package:decarbonus/responsive/web_screen_layout.dart';
 import 'package:decarbonus/screens/getting_started.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -142,7 +141,7 @@ class MyApp extends StatelessWidget {
             // if snapshot has data which means user is logged in then we check the width of screen and accordingly display the screen layout
             return const ResponsiveLayout(
               mobileScreenLayout: GettingStarted(),
-              webScreenLayout: WebScreenLayout(),
+              webScreenLayout: GettingStarted(),
             );
           } else if (snapshot.hasError) {
             return Center(

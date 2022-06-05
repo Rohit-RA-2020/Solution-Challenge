@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
-import 'package:lottie/lottie.dart';
+import 'package:material_dialogs/widgets/buttons/icon_button.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import '../../store.dart';
 import '../../utils/global_variable.dart';
 import '../weekly_activities.dart';
+import 'package:material_dialogs/material_dialogs.dart';
 
 class Home extends StatefulWidget {
   const Home({
@@ -302,10 +303,15 @@ class _HomeState extends State<Home> {
         onChanged: (bool? value) {
           setState(() {
             isChecked[index] = value!;
-            if (isChecked.every((element) {
-              return element == true;
-            })) {
+            if (isChecked[0] == true &&
+                isChecked[1] == true &&
+                isChecked[2] != true) {
               taskComplete();
+            }
+            if (isChecked[0] == true &&
+                isChecked[1] == true &&
+                isChecked[2] == true) {
+              bonusComplete();
             }
           });
         },
@@ -314,27 +320,48 @@ class _HomeState extends State<Home> {
   }
 
   void taskComplete() {
-    showDialog(
+    Dialogs.materialDialog(
+      color: Colors.white,
+      msg: 'You have gained 10 points',
+      title: 'Congratulations, task completed',
+      lottieBuilder: LottieBuilder.asset('assets/lottie/points.json'),
       context: context,
-      builder: (context) {
-        return Stack(
-          children: [
-            Lottie.asset('assets/lottie/confetti.json'),
-            AlertDialog(
-              title: const Text('Task Completed'),
-              content: const Text('Yay, you completed day 1 task'),
-              actions: [
-                TextButton(
-                  child: const Text('OK'),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
-              ],
-            ),
-          ],
-        );
-      },
+      customView: Lottie.asset('assets/lottie/confetti.json'),
+      actions: [
+        IconsButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          text: 'Ok',
+          iconData: Icons.done,
+          color: Colors.green,
+          textStyle: const TextStyle(color: Colors.white),
+          iconColor: Colors.white,
+        ),
+      ],
+    );
+  }
+
+  void bonusComplete() {
+    Dialogs.materialDialog(
+      color: Colors.white,
+      title: 'Wow, Bonus task completed',
+      msg: 'You get extra 10 points',
+      lottieBuilder: LottieBuilder.asset('assets/lottie/bonus.json'),
+      context: context,
+      customView: Lottie.asset('assets/lottie/confetti.json'),
+      actions: [
+        IconsButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          text: 'Ok',
+          iconData: Icons.done,
+          color: Colors.green,
+          textStyle: const TextStyle(color: Colors.white),
+          iconColor: Colors.white,
+        ),
+      ],
     );
   }
 }

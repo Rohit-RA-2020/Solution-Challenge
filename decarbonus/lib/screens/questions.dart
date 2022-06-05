@@ -30,7 +30,7 @@ class _QuestionsState extends State<Questions> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(40.0),
+        preferredSize: const Size.fromHeight(20.0),
         child: AppBar(
             automaticallyImplyLeading: false,
             backgroundColor: Colors.transparent,
@@ -147,29 +147,32 @@ class _QuestionsState extends State<Questions> {
                 ),
               ),
               Expanded(
-                child: ListView.builder(
-                  itemCount: questionsList[questionIndex]['options'].length,
-                  itemBuilder: (context, index) => Container(
-                    margin: const EdgeInsets.all(4),
-                    decoration: BoxDecoration(
-                      color: selectedOption == index
-                          ? const Color(0xFF1DBF73)
-                          : null,
-                      borderRadius: BorderRadius.circular(15),
-                      border: Border.all(
-                        color: Colors.black,
-                        width: 1,
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 8.0),
+                  child: ListView.builder(
+                    itemCount: questionsList[questionIndex]['options'].length,
+                    itemBuilder: (context, index) => Container(
+                      margin: const EdgeInsets.only(bottom: 10),
+                      decoration: BoxDecoration(
+                        color: selectedOption == index
+                            ? const Color(0xFF1DBF73)
+                            : null,
+                        borderRadius: BorderRadius.circular(15),
+                        border: Border.all(
+                          color: Colors.black,
+                          width: 1,
+                        ),
                       ),
-                    ),
-                    child: ListTile(
-                      onTap: () {
-                        setState(() {
-                          selectedOption = index;
-                          responses.addAll({questionIndex.toString(): index});
-                        });
-                      },
-                      title:
-                          Text(questionsList[questionIndex]['options'][index]),
+                      child: ListTile(
+                        onTap: () {
+                          setState(() {
+                            selectedOption = index;
+                            responses.addAll({questionIndex.toString(): index});
+                          });
+                        },
+                        title: Text(
+                            questionsList[questionIndex]['options'][index]),
+                      ),
                     ),
                   ),
                 ),

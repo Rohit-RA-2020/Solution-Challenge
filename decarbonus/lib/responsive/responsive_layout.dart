@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:decarbonus/providers/user_provider.dart';
-import 'package:decarbonus/utils/global_variable.dart';
 import 'package:provider/provider.dart';
 
 class ResponsiveLayout extends StatefulWidget {
@@ -32,10 +31,6 @@ class _ResponsiveLayoutState extends State<ResponsiveLayout> {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
-      if (constraints.maxWidth > webScreenSize) {
-        // 600 can be changed to 900 if you want to display tablet screen with mobile screen layout
-        return widget.webScreenLayout;
-      }
       return widget.mobileScreenLayout;
     });
   }

@@ -20,7 +20,7 @@ class AuthMethods {
 
   // Signing Up User
 
-  Future<String> signUpUser({
+  Future<String> signUpUserWithImage({
     required String email,
     required String password,
     required String username,
@@ -46,6 +46,52 @@ class AuthMethods {
           username: username,
           uid: cred.user!.uid,
           photoUrl: photoUrl,
+          email: email,
+          bio: bio,
+          followers: [],
+          following: [],
+          responses: {},
+        );
+
+        // adding user in our database
+        await _firestore
+            .collection("users")
+            .doc(cred.user!.uid)
+            .set(_user.toJson());
+
+        res = "success";
+      } else {
+        res = "Please enter all the fields";
+      }
+    } on FirebaseException catch (err) {
+      return err.toString();
+    }
+    return res;
+  }
+
+  Future<String> signUpUser({
+    required String email,
+    required String password,
+    required String username,
+    required String bio,
+  }) async {
+    String res = "Some error Occurred";
+    try {
+      if (email.isNotEmpty ||
+          password.isNotEmpty ||
+          username.isNotEmpty ||
+          bio.isNotEmpty) {
+        // registering user in auth with email and password
+        UserCredential cred = await _auth.createUserWithEmailAndPassword(
+          email: email,
+          password: password,
+        );
+
+        model.User _user = model.User(
+          username: username,
+          uid: cred.user!.uid,
+          photoUrl:
+              'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png',
           email: email,
           bio: bio,
           followers: [],
