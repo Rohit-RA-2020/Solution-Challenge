@@ -115,6 +115,46 @@ class AuthMethods {
     return res;
   }
 
+  Future<String> googleSign({
+    required String email,
+    required String username,
+    required String bio,
+    required String userid,
+    required String photoUrl,
+  }) async {
+    String res = "Some error Occurred";
+    try {
+      if (email.isNotEmpty || username.isNotEmpty || bio.isNotEmpty) {
+        // registering user in auth with email and password
+
+        model.User _user = model.User(
+          username: username,
+          uid: userid,
+          photoUrl: photoUrl,
+          email: email,
+          bio: bio,
+          followers: [],
+          following: [],
+          responses: {},
+        );
+
+        // adding user in our database
+        try {
+          await _firestore.collection("users").doc(userid).get();
+        } catch (e) {
+          await _firestore.collection("users").doc(userid).set(_user.toJson());
+        }
+
+        res = "success";
+      } else {
+        res = "Please enter all the fields";
+      }
+    } on FirebaseException catch (err) {
+      return err.toString();
+    }
+    return res;
+  }
+
   // logging in user
   Future<String> loginUser({
     required String email,

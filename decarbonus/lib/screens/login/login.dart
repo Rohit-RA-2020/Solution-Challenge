@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:decarbonus/Screens/login/components/cancel_button.dart';
 import 'package:decarbonus/Screens/login/components/login_form.dart';
 import 'package:decarbonus/Screens/login/components/register_form.dart';
 import 'package:decarbonus/constants.dart';
@@ -50,53 +49,6 @@ class _LogScreenState extends State<LogScreen>
       body: SafeArea(
         child: Stack(
           children: [
-            // Lets add some decorations
-            Positioned(
-                top: 200,
-                right: -50,
-                child: Container(
-                  width: 100,
-                  height: 100,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      color: kPrimaryColor),
-                )),
-
-            Positioned(
-                top: -50,
-                left: -50,
-                child: Container(
-                  width: 200,
-                  height: 200,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(100),
-                      color: kPrimaryColor),
-                )),
-
-            Positioned(
-                top: 600,
-                left: -60,
-                child: Container(
-                  width: 140,
-                  height: 140,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(100),
-                      color: kPrimaryColor),
-                )),
-            // Cancel Button
-            CancelButton(
-                isLogin: isLogin,
-                animationDuration: animationDuration,
-                size: size,
-                animationController: animationController!,
-                tapEvent: () {
-                  animationController!.reverse();
-                  setState(() {
-                    isLogin = !isLogin;
-                  });
-                }),
-
-            // Login Form
             LoginForm(
                 isLogin: isLogin,
                 animationDuration: animationDuration,

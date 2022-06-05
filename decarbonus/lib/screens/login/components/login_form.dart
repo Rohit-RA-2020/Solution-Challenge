@@ -3,6 +3,7 @@ import 'package:decarbonus/Screens/getting_started.dart';
 import 'package:decarbonus/responsive/responsive_layout.dart';
 import '../../../constants.dart';
 import '../../../resources/auth_methods.dart';
+import '../../../resources/google_auth.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({
@@ -69,14 +70,19 @@ class _LoginFormState extends State<LoginForm> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
+        controller: ScrollController(initialScrollOffset: 1.0),
+        reverse: true,
+        physics: const NeverScrollableScrollPhysics(),
         child: Column(
           children: <Widget>[
             Container(
               height: 400,
               decoration: const BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage('assets/images/background.png'),
-                      fit: BoxFit.cover)),
+                image: DecorationImage(
+                  image: AssetImage('assets/images/background.png'),
+                  fit: BoxFit.fitWidth,
+                ),
+              ),
               child: Stack(
                 children: <Widget>[
                   Positioned(
@@ -179,6 +185,43 @@ class _LoginFormState extends State<LoginForm> {
                           "Login",
                           style: TextStyle(
                               fontWeight: FontWeight.bold, color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text('OR'),
+                  ),
+                  MaterialButton(
+                    onPressed: () {
+                      GoogleSignInProvider(
+                        context: context,
+                      ).googleLogin();
+                    },
+                    child: Container(
+                      height: 50,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: kPrimaryColor),
+                      ),
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: Image.asset('assets/images/google.png'),
+                            ),
+                            const Text(
+                              "Sign In With Google",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
