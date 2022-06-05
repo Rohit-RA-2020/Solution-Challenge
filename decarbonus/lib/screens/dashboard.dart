@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:decarbonus/constants.dart';
+import 'package:decarbonus/screens/result.dart';
+import 'package:decarbonus/screens/results_page2.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +15,6 @@ import 'package:decarbonus/responsive/mobile_screen_layout.dart';
 import 'package:decarbonus/screens/about.dart';
 import 'package:decarbonus/screens/leaderboard.dart';
 import 'package:decarbonus/screens/profile_screen.dart';
-import 'package:decarbonus/screens/results_menu.dart';
 import 'package:decarbonus/utils/global_variable.dart';
 import 'package:decarbonus/utils/utils.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -235,7 +236,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const YourEmission(),
+                          builder: (context) => const IndividualEmmission(),
                         ),
                       );
                     },
