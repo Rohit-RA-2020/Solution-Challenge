@@ -18,6 +18,9 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  int tsk1 = 0;
+  int tsk2 = 0;
+  int bonu = 0;
   @override
   Widget build(BuildContext context) {
     String cdate = DateFormat("dd MMMM, yyyy").format(DateTime.now());
@@ -53,6 +56,24 @@ class _HomeState extends State<Home> {
                         fontWeight: FontWeight.bold,
                         color: Color(0xFF0D1321),
                       ),
+                    ),
+                    trailing: Column(
+                      children: [
+                        Text(
+                          (tsk1 + tsk2 + bonu).toString(),
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              color: Colors.black54),
+                        ),
+                        const Text(
+                          'Points',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                              color: Colors.black54),
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -303,6 +324,9 @@ class _HomeState extends State<Home> {
         onChanged: (bool? value) {
           setState(() {
             isChecked[index] = value!;
+            isChecked[0] == true ? tsk1 = 5 : tsk1 = 0;
+            isChecked[1] == true ? tsk2 = 5 : tsk2 = 0;
+            isChecked[2] == true ? bonu = 10 : bonu = 0;
             if (isChecked[0] == true &&
                 isChecked[1] == true &&
                 isChecked[2] != true) {
