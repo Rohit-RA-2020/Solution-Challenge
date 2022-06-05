@@ -33,14 +33,14 @@ class GoogleSignInProvider {
     );
 
     try {
-      UserCredential user =
-          await FirebaseAuth.instance.signInWithCredential(credential);
+      await FirebaseAuth.instance.signInWithCredential(credential);
       String res = await AuthMethods().googleSign(
         username: _user!.displayName!,
-        photoUrl: _user!.photoUrl!,
+        photoUrl: _user!.photoUrl == null
+            ? 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png'
+            : _user!.photoUrl!,
         bio: 'Save Planet',
         email: _user!.email,
-        userid: user.user!.uid,
       );
       if (res == 'success') {
         Navigator.of(context).pushAndRemoveUntil(

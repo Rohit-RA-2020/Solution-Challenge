@@ -12,7 +12,6 @@ import 'package:decarbonus/screens/dashboard.dart';
 import 'package:decarbonus/screens/questions.dart';
 import 'package:lottie/lottie.dart';
 import 'package:decarbonus/utils/global_variable.dart';
-import '../utils/utils.dart';
 
 class GettingStarted extends StatefulWidget {
   const GettingStarted({Key? key, this.user}) : super(key: key);
@@ -61,7 +60,7 @@ class _GettingStartedState extends State<GettingStarted> {
     try {
       results = userSnap['result'];
     } catch (e) {
-      showSnackBar(context, e.toString());
+      //showSnackBar(context, e.toString());
     }
   }
 
@@ -76,10 +75,10 @@ class _GettingStartedState extends State<GettingStarted> {
       userData = userSnap.data()!;
       setState(() {});
     } catch (e) {
-      showSnackBar(
-        context,
-        e.toString(),
-      );
+      // showSnackBar(
+      //   context,
+      //   e.toString(),
+      // );
     }
     setState(() {
       isLoading = false;
