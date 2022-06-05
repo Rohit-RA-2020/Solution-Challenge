@@ -13,7 +13,6 @@ class ActivityList extends StatefulWidget {
 class _ActivityListState extends State<ActivityList> {
   @override
   Widget build(BuildContext context) {
-    print(widget.activityName);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Day Wise Activities'),
@@ -43,7 +42,7 @@ class _ActivityListState extends State<ActivityList> {
 
   Padding dayWiseActivity(String day, int index) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(12.0),
       child: Container(
         padding: const EdgeInsets.only(left: 15),
         decoration: BoxDecoration(
@@ -67,6 +66,8 @@ class _ActivityListState extends State<ActivityList> {
           ],
         ),
         child: ExpansionTile(
+          iconColor: const Color(0xFF28B67E),
+          textColor: const Color(0xFF1D4C4F),
           title: Text(day),
           children: <Widget>[
             ListTile(

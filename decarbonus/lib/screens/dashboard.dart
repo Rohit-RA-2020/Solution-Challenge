@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:decarbonus/constants.dart';
-import 'package:decarbonus/screens/result.dart';
-import 'package:decarbonus/screens/results_page2.dart';
+import 'package:decarbonus/screens/results_menu.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -236,7 +235,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const IndividualEmmission(),
+                          builder: (context) => const YourEmission(),
                         ),
                       );
                     },

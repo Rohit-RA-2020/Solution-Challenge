@@ -19,7 +19,7 @@ class _MapsState extends State<Maps> {
   void addMarkers() {
     _markers.add(Marker(
         draggable: true,
-        icon: BitmapDescriptor.defaultMarkerWithHue(300),
+        icon: BitmapDescriptor.defaultMarkerWithHue(110),
         flat: true,
         markerId: const MarkerId('Venue'),
         infoWindow: const InfoWindow(
@@ -27,7 +27,7 @@ class _MapsState extends State<Maps> {
         position: const LatLng(21.1616, 79.0150)));
     _markers.add(Marker(
         draggable: true,
-        icon: BitmapDescriptor.defaultMarkerWithHue(180),
+        icon: BitmapDescriptor.defaultMarkerWithHue(140),
         flat: true,
         infoWindow: const InfoWindow(
             title: 'Lake Cleaning', snippet: "Gorewada Lake Cleaning"),
@@ -36,7 +36,7 @@ class _MapsState extends State<Maps> {
 
     _markers.add(Marker(
         draggable: true,
-        icon: BitmapDescriptor.defaultMarkerWithHue(180),
+        icon: BitmapDescriptor.defaultMarkerWithHue(150),
         flat: true,
         infoWindow:
             const InfoWindow(title: 'Tree Plantation', snippet: "Nagpur City"),

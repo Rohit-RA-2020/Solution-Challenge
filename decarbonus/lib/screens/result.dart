@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:decarbonus/screens/results_page2.dart';
+import 'package:decarbonus/utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:decarbonus/screens/dashboard.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import '../utils/colors.dart';
 import '../utils/global_variable.dart';
@@ -46,7 +46,7 @@ class MyHomePageState extends State<MyHomePage> {
     try {
       results = userSnap['result'];
     } catch (e) {
-      print(e);
+      showSnackBar(context, e.toString());
     }
   }
 
@@ -59,19 +59,15 @@ class MyHomePageState extends State<MyHomePage> {
             )
           : Scaffold(
               body: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 70, horizontal: 25),
+                padding: const EdgeInsets.only(
+                    top: 20, bottom: 70, left: 30, right: 30),
                 child: SfCartesianChart(
-                  palette: const [
-                    Colors.green,
-                    Colors.red,
-                    Colors.orange,
-                    Colors.yellow,
-                    Colors.blue
-                  ],
-                  primaryXAxis: CategoryAxis(),
+                  palette: const [Colors.green],
+                  primaryXAxis: CategoryAxis(
+                    majorGridLines: const MajorGridLines(width: 0),
+                  ),
                   // Chart title
-                  title: ChartTitle(text: 'Your Co2 Emmissions'),
+                  title: ChartTitle(text: 'Let\'s Compare your Co2 emission'),
                   // Enable legend
                   legend: Legend(isVisible: true),
                   // Enable tooltip
@@ -81,7 +77,7 @@ class MyHomePageState extends State<MyHomePage> {
                         dataSource: data,
                         yValueMapper: (_CarbonData carbon, _) => carbon.tons,
                         xValueMapper: (_CarbonData carbon, _) => carbon.year,
-                        name: 'Co2',
+                        name: 'Co2 tons / year',
                         // Enable data label
                         dataLabelSettings:
                             const DataLabelSettings(isVisible: true))
@@ -89,10 +85,10 @@ class MyHomePageState extends State<MyHomePage> {
                 ),
               ),
               floatingActionButtonLocation:
-                  FloatingActionButtonLocation.centerDocked,
+                  FloatingActionButtonLocation.centerFloat,
               floatingActionButton: FloatingActionButton.extended(
                 backgroundColor: kPrimaryColor,
-                label: const Text('View Individual Emmission ➔'),
+                label: const Text('Check emission breakdown ➔'),
                 onPressed: () => Navigator.pushReplacement(
                   context,
                   CupertinoPageRoute(

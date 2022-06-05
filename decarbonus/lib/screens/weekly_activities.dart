@@ -54,6 +54,7 @@ class _WeeklyActivitiesState extends State<WeeklyActivities> {
           Padding(
             padding: const EdgeInsets.all(15.0),
             child: RichText(
+              textAlign: TextAlign.center,
               text: TextSpan(
                 // Note: Styles for TextSpans must be explicitly defined.
                 // Child text spans will inherit styles from parent
@@ -85,7 +86,11 @@ class _WeeklyActivitiesState extends State<WeeklyActivities> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          Lottie.asset('assets/lottie/path.json', fit: BoxFit.scaleDown),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child:
+                Lottie.asset('assets/lottie/path.json', fit: BoxFit.scaleDown),
+          ),
           const Padding(
             padding: EdgeInsets.only(
                 left: 15.0, right: 15.0, top: 10.0, bottom: 10.0),
@@ -120,7 +125,7 @@ class _WeeklyActivitiesState extends State<WeeklyActivities> {
             padding: const EdgeInsets.fromLTRB(20.0, 30.0, 20.0, 20.0),
             child: Card(
               elevation: 10,
-              color: Colors.grey.shade300,
+              color: Colors.grey.shade200,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
@@ -162,7 +167,7 @@ class WeekWidget extends StatelessWidget {
       child: InkWell(
         onTap: () {
           if (week != 'Week 1') {
-            showSnackBar(context, 'This week is currently locked');
+            showSnackBar(context, '$week is locked, complete week 1 first');
           } else {
             Navigator.push(
               context,

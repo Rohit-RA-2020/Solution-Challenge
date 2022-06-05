@@ -61,7 +61,7 @@ class _GettingStartedState extends State<GettingStarted> {
     try {
       results = userSnap['result'];
     } catch (e) {
-      print(e);
+      showSnackBar(context, e.toString());
     }
   }
 

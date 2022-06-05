@@ -110,11 +110,29 @@ class _HomeState extends State<Home> {
                 const SizedBox(height: 10),
                 Padding(
                   padding: const EdgeInsets.only(
+                      left: 25.0, right: 25.0, bottom: 20, top: 10.0),
+                  child: Row(
+                    children: const [
+                      Text(
+                        'Daily Challenge',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25.0,
+                          color: Colors.black,
+                        ),
+                      ),
+                      Icon(Icons.navigate_next_rounded,
+                          size: 35, color: Color(0xFF1D4C4F)),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
                       left: 25.0, right: 25.0, bottom: 20),
                   child: Container(
                     width: 200,
                     decoration: BoxDecoration(
-                      color: Colors.grey.shade300,
+                      color: Colors.grey.shade100,
                       borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(10),
                           topRight: Radius.circular(10),
@@ -122,7 +140,7 @@ class _HomeState extends State<Home> {
                           bottomRight: Radius.circular(10)),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.lightBlue.withOpacity(0.2),
+                          color: Colors.grey.withOpacity(0.5),
                           spreadRadius: 5,
                           blurRadius: 7,
                           offset:
@@ -138,7 +156,7 @@ class _HomeState extends State<Home> {
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 20.0,
-                            color: Color(0xFF1D4C4F),
+                            color: Color.fromARGB(255, 11, 40, 42),
                           ),
                         ),
                         todayTask(dailyTasks['1'], 0),
@@ -149,12 +167,30 @@ class _HomeState extends State<Home> {
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 20.0,
-                            color: Color(0xFF1D4C4F),
+                            color: Color.fromARGB(255, 11, 40, 42),
                           ),
                         ),
                         todayTask(dailyTasks['3'], 2),
                       ],
                     ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                      left: 25.0, right: 25.0, bottom: 0, top: 20.0),
+                  child: Row(
+                    children: const [
+                      Text(
+                        'Progress Diary',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25.0,
+                          color: Colors.black,
+                        ),
+                      ),
+                      Icon(Icons.navigate_next_rounded,
+                          size: 35, color: Color(0xFF1D4C4F)),
+                    ],
                   ),
                 ),
                 Container(
@@ -262,7 +298,7 @@ class _HomeState extends State<Home> {
         ),
         value: isChecked[index],
         checkColor: Colors.white,
-        activeColor: const Color(0xFF1D4C4F),
+        activeColor: const Color.fromARGB(255, 11, 40, 42),
         onChanged: (bool? value) {
           setState(() {
             isChecked[index] = value!;
