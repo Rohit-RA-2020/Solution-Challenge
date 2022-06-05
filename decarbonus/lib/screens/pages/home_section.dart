@@ -18,6 +18,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  int _points = 0;
   @override
   Widget build(BuildContext context) {
     String cdate = DateFormat("dd MMMM, yyyy").format(DateTime.now());
@@ -53,6 +54,24 @@ class _HomeState extends State<Home> {
                         fontWeight: FontWeight.bold,
                         color: Color(0xFF0D1321),
                       ),
+                    ),
+                    trailing: Column(
+                      children: [
+                        Text(
+                          _points.toString(),
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              color: Colors.black54),
+                        ),
+                        Text(
+                          'Points',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                              color: Colors.black54),
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -304,14 +323,26 @@ class _HomeState extends State<Home> {
           setState(() {
             isChecked[index] = value!;
             if (isChecked[0] == true &&
+                isChecked[1] != true &&
+                isChecked[2] != true) {
+              _points = _points + 5;
+            }
+            if (isChecked[0] == true &&
                 isChecked[1] == true &&
                 isChecked[2] != true) {
               taskComplete();
+              _points = _points + 5;
             }
             if (isChecked[0] == true &&
                 isChecked[1] == true &&
                 isChecked[2] == true) {
               bonusComplete();
+              _points = _points + 10;
+            }
+            if (isChecked[0] != true &&
+                isChecked[1] != true &&
+                isChecked[2] != true) {
+              _points = 0;
             }
           });
         },
