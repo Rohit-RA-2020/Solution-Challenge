@@ -25,8 +25,8 @@ With our app, the user can easily monitor and analyze how their daily activities
 
 You can checkout our video submission demo on youtube by clicking on the thumbnail below.
 
-<a href="https://youtu.be/gEWpSYK4p4o">
-<img src="https://i3.ytimg.com/vi/gEWpSYK4p4o/maxresdefault.jpg" width="500px">                                                                       
+<a href="https://youtu.be/dxp1GajblgU">
+<img src="images/DeCarbonUs1.png" width="500px">                                                                       
 </a>
 
 ### This Project has been made targeting these UN Sustainable Goals
@@ -67,7 +67,7 @@ The contents in this repo follow the following structure, divided into two direc
   - For the backend, we mostly relied on Firebase, for authentication and cloud storage
    
   - We have used our own REST API for calucalting the carbon footprint based upon user's data which is deployed on Google Cloud Platform.<br>
-<img src="images/DeCarbonUs.png">
+<img src="images/DeCarbonUs1.png">
    
   - For storing the different types of data including user data like responses, results, posts, followers, bio, list of posts etc we have used Firestore database 
    
