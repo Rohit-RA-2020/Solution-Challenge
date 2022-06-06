@@ -91,20 +91,23 @@ git clone https://github.com/Rohit-RA-2020/Solution-Challenge
   #### For start the API
 ```bash
 cd \carbon
+node i install
 node index.js
 ```
 #### API Deployed at :- https://api-account-345807.el.r.appspot.com 
 
   #### To run the app
 ```bash
-cd \reduce_footprint
+cd \decarbonus
+flutter pub get
 flutter run
 ```
 ## Please Note
-### Goto android -> app -> src -> main -> AndroidManifest.xml
+```bash
+Goto android -> app -> src -> main -> AndroidManifest.xml
 
-### Replace The 'API_KEY_HERE' with your google maps api key to make sure G-Maps work properly.
-
+Replace The 'API_KEY_HERE' with your google maps api key to make sure G-Maps work properly.
+```
 
 
 ## Made with ♥ by 
