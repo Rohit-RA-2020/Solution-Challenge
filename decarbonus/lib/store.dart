@@ -3,6 +3,10 @@ var blogPost = [];
 
 List<bool> isChecked = [false, false, false];
 
+int tsk1 = 0;
+int tsk2 = 0;
+int bonu = 0;
+
 Map<String, dynamic> dailyTasks = {};
 
 Map<String, String> activitydesc = {

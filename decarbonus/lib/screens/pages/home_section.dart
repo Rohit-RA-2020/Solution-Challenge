@@ -18,9 +18,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  int tsk1 = 0;
-  int tsk2 = 0;
-  int bonu = 0;
   @override
   Widget build(BuildContext context) {
     String cdate = DateFormat("dd MMMM, yyyy").format(DateTime.now());
