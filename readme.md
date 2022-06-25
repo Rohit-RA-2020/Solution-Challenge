@@ -26,7 +26,7 @@ With our app, the user can easily monitor and analyze how their daily activities
 You can checkout our video submission demo on youtube by clicking on the thumbnail below.
 
 <a href="https://youtu.be/dxp1GajblgU">
-<img src="images/DeCarbonUs1.png" width="500px">                                                                       
+<img src="images/team.jpg" width="500px">                                                                       
 </a>
 
 ### This Project has been made targeting these UN Sustainable Goals
