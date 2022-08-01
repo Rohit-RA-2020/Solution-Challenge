@@ -16,6 +16,15 @@ class FireStoreMethods {
       'postId': postId,
     });
   }
+  Future<void> reportComment(String userName, String userId, String commentId, String text) async {
+    return await _firestore.collection('report').doc(userId).set({
+      'userName': userName,
+      'userId': userId,
+      'reported': true,
+      'commentId': commentId,
+      'text': text,
+    });
+  }
 
   Future<String> uploadPost(String description, Uint8List file, String uid,
       String username, String profImage) async {

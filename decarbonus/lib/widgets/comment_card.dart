@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import '../resources/firestore_methods.dart';
+import '../utils/utils.dart';
 
 class CommentCard extends StatelessWidget {
   final dynamic snap;
@@ -7,6 +9,7 @@ class CommentCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(snap.data());
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
       child: Row(
@@ -57,6 +60,48 @@ class CommentCard extends StatelessWidget {
               ),
             ),
           ),
+          Expanded(
+            child: Align(
+              alignment: Alignment.topRight,
+              child: IconButton(
+                icon: const Icon(Icons.more_vert),
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: const Text('Found something wrong'),
+                      content: const Text(
+                          'Do you want to report this comment?'),
+                      actions: [
+                        TextButton(
+                          child: const Text(
+                            'Report',
+                            style: TextStyle(color: Colors.red),
+                          ),
+                          onPressed: () {
+                            FireStoreMethods().reportComment(
+                              snap['name'].toString(),
+                              snap['uid'].toString(),
+                              snap['commentId'].toString(),
+                              snap['text'].toString(),
+                            );
+                            Navigator.of(context).pop();
+                            showSnackBar(context, 'Comment reported');
+                          },
+                        ),
+                        TextButton(
+                          child: const Text('Cancel'),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ),
+          )
         ],
       ),
     );
